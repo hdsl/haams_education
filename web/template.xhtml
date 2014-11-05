@@ -10,6 +10,7 @@
         <link href="#{application.contextPath}/resources/css/common.css" rel="stylesheet" type="text/css"/>
 
         <title>Haams: System Admin Welcome</title>
+        <ui:insert name="metadata"/>
     </h:head>
     <h:body>        
 
@@ -60,38 +61,43 @@
                         <div class="sublink" style="margin-left: -60px;margin-right: -27px">
                             <ul type="none">
                                 <li><a href="#{application.contextPath}/sysadmin/student_data?id=34ueh876i3h4f9873kj4b3">Student Detail</a></li>
-                                <li><a href="#{application.contextPath}/sysadmin/residence.?id=3h29378jhh37wshw733h3">Students Residence</a></li>
-                                <li><a href="#{application.contextPath}/sysadmin/school_staff.xhtml">School Staff</a></li>
                                 <li><a href="#{application.contextPath}/sysadmin/student_reg?id=3jd3hyu4js743jws634ygs3">Student Registration</a></li>
+                                <li><a href="#{application.contextPath}/sysadmin/residence?id=3h29378jhh37wshw733h3">Students Residence</a></li>
+                                <li><a href="#{application.contextPath}/sysadmin/school_staff">School Staff</a></li>
                               </ul>
                         </div>
                     </p:tab> 
 
-                    <p:tab title="Services" rendered="#{navHandler.module == 'sysadmin'}">
+                    <p:tab title="Academics" rendered="#{navHandler.module == 'sysadmin'}">
                         <div class="sublink" style="margin-left: -60px;margin-right: -27px">
                             <ul type="none">
-                                  <li><a href="#{application.contextPath}/sysadmin/service_request?id=4hdd64hh46d6d6d6h4hhf">Service Request</a></li>
-                                <li><a href="#{application.contextPath}/sysadmin/preventive_maintenance">Preventive Maintenance</a></li>
-                                <li><a href="#{application.contextPath}/sysadmin/service_request?id=4hdd64hh46d6d6d6h4hhf">Rework</a></li>
-                                <li><a href="#{application.contextPath}/sysadmin/service_type?id=4hdd64hh46d6d6d6h4hhf">Service Types</a></li>
-                                <li><a href="#{application.contextPath}/sysadmin/service_model?id=47hnfh6fydheisduisjdl">Service Type Models</a></li>
-                                <li><a href="#{application.contextPath}/sysadmin/model_component?id=373ehjdfs76dsdhsd8jh">Model Component(s)</a></li>
-                                <li><a href="#{application.contextPath}/sysadmin/installation_software?id=4hdd64hh46d6d6d6h4hhf">Installation Software(s)</a></li>
+                                  <li><a href="#{application.contextPath}/sysadmin/service_request?id=4hdd64hh46d6d6d6h4hhf">Class Membership</a></li>
+                                <li><a href="#{application.contextPath}/sysadmin/preventive_maintenance">Subject Teacher</a></li>
+                                <li><a href="#{application.contextPath}/sysadmin/service_request?id=4hdd64hh46d6d6d6h4hhf">Class Teacher</a></li>
+                                <li><a href="#{application.contextPath}/sysadmin/service_type?id=4hdd64hh46d6d6d6h4hhf">Students Mark</a></li>
+                                <li><a href="#{application.contextPath}/sysadmin/service_model?id=47hnfh6fydheisduisjdl">Students Report</a></li>
+                                <li><a href="#{application.contextPath}/sysadmin/model_component?id=373ehjdfs76dsdhsd8jh">Academic Courses</a></li>
+                                <li><a href="#{application.contextPath}/sysadmin/installation_software?id=4hdd64hh46d6d6d6h4hhf">Academic Subjects</a></li>
+                                <li><a href="#{application.contextPath}/sysadmin/installation_software?id=4hdd64hh46d6d6d6h4hhf">Subject Combination</a></li>
+                                <li><a href="#{application.contextPath}/sysadmin/installation_software?id=4hdd64hh46d6d6d6h4hhf">Course Class</a></li>
                             </ul>
                         </div>
                     </p:tab> 
-                    <p:tab title="Reports" rendered="#{navHandler.module == 'sysadmin'}">
+                    <p:tab title="Students Finance" rendered="#{navHandler.module == 'sysadmin'}">
                         <div class="sublink" style="margin-left: -60px;margin-right: -27px">
                             <ul type="none">
-                                <li><a href="#{application.contextPath}/sysadmin/general_report?id=784jer7fefdkf74rdf">General Report</a></li>
+                                <li><a href="#{application.contextPath}/sysadmin/general_report?id=784jer7fefdkf74rdf">Student Bill Items</a></li>
+                                <li><a href="#{application.contextPath}/sysadmin/general_report?id=784jer7fefdkf74rdf">Class Billing</a></li>
+                                <li><a href="#{application.contextPath}/sysadmin/general_report?id=784jer7fefdkf74rdf">Special Billing</a></li>
+                                <li><a href="#{application.contextPath}/sysadmin/general_report?id=784jer7fefdkf74rdf">Student Ledger</a></li>
                             </ul>
                         </div>
                     </p:tab> 
 
-                    <p:tab title="Human Resource" rendered="#{navHandler.module == 'sysadmin'}">
+                    <p:tab title="Reports" rendered="#{navHandler.module == 'sysadmin'}">
                         <div class="sublink" style="margin-left: -60px;margin-right: -27px">
                             <ul type="none">
-                                <li><a href="#{application.contextPath}/sysadmin/staff_details?id=meu6h73uhds7djwe6tshbdw">Staff Information</a></li>
+                                <li><a href="#{application.contextPath}/sysadmin/staff_details?id=meu6h73uhds7djwe6tshbdw">General Reports</a></li>
 
                             </ul>
                         </div>
@@ -100,12 +106,12 @@
                     <p:tab title="General Settings" rendered="#{navHandler.module == 'sysadmin'}">
                         <div class="sublink" style="margin-left: -60px;margin-right: -27px">
                             <ul type="none">
-                                <li><a href="#{application.contextPath}/sysadmin/access_right?id=e34dfsafadsfdedsa">Access Right</a></li>
+                                
+                                <li><a href="#{application.contextPath}/sysadmin/academic_year?id=e34dfsafadsfdedsa">Academic Year</a></li>
+                                <li><a href="#{application.contextPath}/sysadmin/academic_term?id=a63gwe63hsd6sdw693ebs6sd">Academic Term</a></li>
+                                <li><a href="#{application.contextPath}/sysadmin/school_term?id=a63gwe63hdferdfe4343ebs6sd">Current Academic Term</a></li>
                                 <li><a href="#{application.contextPath}/sysadmin/user_account?id=a63gwe63hsd6sdw693ebs6sd">Manage Users</a></li>
 
-                                <li><a href="user_account.xhtml">Departments</a></li>
-                                <!--                                <li><a href="user_account.xhtml">Business Types</a></li>
-                                                                <li><a href="user_account.xhtml">Equipment Types</a></li>-->
                             </ul>
                         </div>
                     </p:tab>

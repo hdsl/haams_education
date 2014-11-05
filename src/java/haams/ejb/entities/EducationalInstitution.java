@@ -20,77 +20,61 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author HDSL_MUMIN
+ * @author AbdulMumin
  */
 @Entity
-@Table(name = "educational_institution", catalog = "haams_edu", schema = "")
-@XmlRootElement
+@Table(name = "educational_institution")
 @NamedQueries({
-    @NamedQuery(name = "EducationalInstitution.findAll", query = "SELECT e FROM EducationalInstitution e"),
-    @NamedQuery(name = "EducationalInstitution.findByInstitutionId", query = "SELECT e FROM EducationalInstitution e WHERE e.institutionId = :institutionId"),
-    @NamedQuery(name = "EducationalInstitution.findByInstitutionName", query = "SELECT e FROM EducationalInstitution e WHERE e.institutionName = :institutionName"),
-    @NamedQuery(name = "EducationalInstitution.findByInstitutionMotor", query = "SELECT e FROM EducationalInstitution e WHERE e.institutionMotor = :institutionMotor"),
-    @NamedQuery(name = "EducationalInstitution.findByInstitutionCycle", query = "SELECT e FROM EducationalInstitution e WHERE e.institutionCycle = :institutionCycle"),
-    @NamedQuery(name = "EducationalInstitution.findByInstitutionPrimaryContact", query = "SELECT e FROM EducationalInstitution e WHERE e.institutionPrimaryContact = :institutionPrimaryContact"),
-    @NamedQuery(name = "EducationalInstitution.findByInstitutionOtherContact", query = "SELECT e FROM EducationalInstitution e WHERE e.institutionOtherContact = :institutionOtherContact"),
-    @NamedQuery(name = "EducationalInstitution.findByAverageExamScore", query = "SELECT e FROM EducationalInstitution e WHERE e.averageExamScore = :averageExamScore"),
-    @NamedQuery(name = "EducationalInstitution.findByCurrentAcademicTerm", query = "SELECT e FROM EducationalInstitution e WHERE e.currentAcademicTerm = :currentAcademicTerm"),
-    @NamedQuery(name = "EducationalInstitution.findByAverageClassScore", query = "SELECT e FROM EducationalInstitution e WHERE e.averageClassScore = :averageClassScore"),
-    @NamedQuery(name = "EducationalInstitution.findByServerName", query = "SELECT e FROM EducationalInstitution e WHERE e.serverName = :serverName"),
-    @NamedQuery(name = "EducationalInstitution.findByPixFolderName", query = "SELECT e FROM EducationalInstitution e WHERE e.pixFolderName = :pixFolderName"),
-    @NamedQuery(name = "EducationalInstitution.findBySuperUsername", query = "SELECT e FROM EducationalInstitution e WHERE e.superUsername = :superUsername"),
-    @NamedQuery(name = "EducationalInstitution.findBySuperPassword", query = "SELECT e FROM EducationalInstitution e WHERE e.superPassword = :superPassword"),
-    @NamedQuery(name = "EducationalInstitution.findByDateOfRegistration", query = "SELECT e FROM EducationalInstitution e WHERE e.dateOfRegistration = :dateOfRegistration")})
+    @NamedQuery(name = "EducationalInstitution.findAll", query = "SELECT e FROM EducationalInstitution e")})
 public class EducationalInstitution implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 35)
-    @Column(name = "institution_id", nullable = false, length = 35)
+    @Column(name = "institution_id")
     private String institutionId;
     @Size(max = 79)
-    @Column(name = "institution_name", length = 79)
+    @Column(name = "institution_name")
     private String institutionName;
     @Size(max = 79)
-    @Column(name = "institution_motor", length = 79)
+    @Column(name = "institution_motor")
     private String institutionMotor;
     @Size(max = 35)
-    @Column(name = "institution_cycle", length = 35)
+    @Column(name = "institution_cycle")
     private String institutionCycle;
     @Size(max = 15)
-    @Column(name = "institution_primary_contact", length = 15)
+    @Column(name = "institution_primary_contact")
     private String institutionPrimaryContact;
     @Size(max = 15)
-    @Column(name = "institution_other_contact", length = 15)
+    @Column(name = "institution_other_contact")
     private String institutionOtherContact;
     @Lob
     @Size(max = 65535)
-    @Column(name = "institution_address", length = 65535)
+    @Column(name = "institution_address")
     private String institutionAddress;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "average_exam_score", precision = 22)
+    @Column(name = "average_exam_score")
     private Double averageExamScore;
     @Size(max = 35)
-    @Column(name = "current_academic_term", length = 35)
+    @Column(name = "current_academic_term")
     private String currentAcademicTerm;
-    @Column(name = "average_class_score", precision = 22)
+    @Column(name = "average_class_score")
     private Double averageClassScore;
     @Size(max = 35)
-    @Column(name = "server_name", length = 35)
+    @Column(name = "server_name")
     private String serverName;
     @Size(max = 35)
-    @Column(name = "pix_folder_name", length = 35)
+    @Column(name = "pix_folder_name")
     private String pixFolderName;
     @Size(max = 45)
-    @Column(name = "super_username", length = 45)
+    @Column(name = "super_username")
     private String superUsername;
     @Size(max = 45)
-    @Column(name = "super_password", length = 45)
+    @Column(name = "super_password")
     private String superPassword;
     @Column(name = "date_of_registration")
     @Temporal(TemporalType.TIMESTAMP)
@@ -245,7 +229,7 @@ public class EducationalInstitution implements Serializable {
 
     @Override
     public String toString() {
-        return "haams.ejb.entities.EducationalInstitution[ institutionId=" + institutionId + " ]";
+        return "haamsEdu.ejb.entities.EducationalInstitution[ institutionId=" + institutionId + " ]";
     }
     
 }

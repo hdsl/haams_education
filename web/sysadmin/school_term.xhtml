@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head><title></title></h:head>
+
+    <h:body>
+        <p:messages/>
+        <h:form>
+
+            <h:panelGroup layout="block">
+
+                <p:panel>
+
+                    <f:facet name="header"><span style="font-weight: bolder;font-variant: small-caps">Current School Term</span></f:facet>
+                    <h:panelGrid columns="4" style="margin-top: 10px">
+                        <h:outputLabel value="School Academic Term:"/>
+                        <h:selectOneMenu value="#{settingController.academicTerm}">
+                            <f:selectItem itemLabel="...Select One..." itemValue="null"/>
+                            <f:selectItems value="#{commonOptions.academicTermOptions}"/>
+                        </h:selectOneMenu>    
+                        <h:commandButton style="margin-left: 30px" value="Set as current school term"
+                                         action="#{settingController.setCurrentTerm()}"/>
+                    </h:panelGrid>
+
+                </p:panel>
+            </h:panelGroup>
+        </h:form>
+    </h:body>
+</html>
+

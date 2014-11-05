@@ -322,5 +322,10 @@ h2.report-group-heading {
     width: 400px;
     /*.site_name {font-size: 24px;	width: 300px;	line-height: 26px;}*/
 }
+
+.outputLable{
+    background-color: #CCFFFF;
+    font-weight: bold;
+}
 /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 

@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head><title></title></h:head>
+
+    <h:body>
+        <p:messages/>
+        <p:panel style="overflow: auto">
+            <f:facet name="header"><span style="font-weight: bolder;font-variant: small-caps">Academic Term Details</span></f:facet>
+
+            <h:form>
+                <p:panel  style="overflow: auto;">
+                    <h:panelGroup layout="block">
+                        
+                        <h:panelGrid columns="4">
+                            <h:outputLabel value="Academic Year:"/>
+                            <h:selectOneMenu value="#{academicTermController.academicYear}"  styleClass="textarea">
+                                <f:selectItem itemLabel="...Select One..." itemValue=""/>
+                                <f:selectItems value="#{commonOptions.academicYearOptions}"/>
+                            </h:selectOneMenu>                            
+                            <h:outputLabel value="Academic Term:"/>
+                            <h:selectOneMenu value="#{academicTermController.schoolTerm}"  styleClass="textarea">
+                                <f:selectItems value="#{commonOptions.schoolTermOptions}"/>
+                            </h:selectOneMenu>                            
+                            <h:outputLabel value="Term Begin Date:"/>
+                            <p:calendar navigator="true" showOn="button"
+                                        value="#{academicTermController.academicTerm.termBegin}"/>
+                            <h:outputLabel value="Term End Date:"/>
+                            <p:calendar navigator="true" showOn="button"
+                                        value="#{academicTermController.academicTerm.termEnd}"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="4" style="margin-top: 20px">
+                            <p:commandButton value="#{academicTermController.saveEditButtonText}"
+                                             action="#{academicTermController.saveEditButtonAction()}"
+                                             icon="ui-icon-disk" ajax="false"
+                                             update=":academicTermList"/>
+                            <p:commandButton value="Clear" icon="ui-icon-cancel" ajax="false"
+                                             action="#{academicTermController.resetButtonAction()}"/>
+                        </h:panelGrid>
+                        
+                    </h:panelGroup>
+                </p:panel>
+            </h:form>
+
+            <h:form id="academicTermList">
+                <p:dataTable paginator="true" rows="10" var="term" style="margin-top: 20px"
+                             value="#{academicTermView.academicTermList}"
+                             rowKey="#{term.commonId}"  
+                             selection="#{academicTermController.academicTerm}"
+                             selectionMode="single"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">     
+                    <p:column>
+                        <f:facet name="header">Academic Term Id</f:facet>
+                        <h:outputText value="#{term.commonId}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Academic Term</f:facet>
+                        <h:outputText value="#{term.termDesc}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Academic Year</f:facet>
+                        <h:outputText value="#{term.academicYear}"/>
+                    </p:column>                   
+                    <p:column>
+                        <f:facet name="header">Begin Date</f:facet>
+                        <h:outputText value="#{term.termBegin}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">End Date</f:facet>
+                        <h:outputText value="#{term.termEnd}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header"></f:facet>
+                        <p:commandLink value="Edit" style="text-decoration: none;color:blue"
+                                       action="#{academicTermController.rowSelectDataAction(term)}"
+                                       ajax="false"/>
+                        <p:commandLink value="Delete" style="text-decoration: none;color: red;margin-left: 20px"
+                                       action="#{academicTermController.deleteButtonAction(term)}"
+                                       onclick="confirm('Are you sure you want to delete?')"
+                                        ajax="false"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+        </p:panel>
+    </h:body>
+</html>
+

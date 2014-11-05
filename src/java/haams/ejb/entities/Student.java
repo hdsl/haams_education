@@ -3,177 +3,123 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package haams.ejb.entities;
 
-import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author HDSL_MUMIN
+ * @author AbdulMumin
  */
 @Entity
-@Table(name = "student", catalog = "haams_edu", schema = "")
-@XmlRootElement
+@Table(name = "student")
 @NamedQueries({
-    @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s"),
-    @NamedQuery(name = "Student.findByStudentId", query = "SELECT s FROM Student s WHERE s.studentId = :studentId"),
-    @NamedQuery(name = "Student.findBySurname", query = "SELECT s FROM Student s WHERE s.surname = :surname"),
-    @NamedQuery(name = "Student.findByOthernames", query = "SELECT s FROM Student s WHERE s.othernames = :othernames"),
-    @NamedQuery(name = "Student.findByGender", query = "SELECT s FROM Student s WHERE s.gender = :gender"),
-    @NamedQuery(name = "Student.findByDateOfbirth", query = "SELECT s FROM Student s WHERE s.dateOfbirth = :dateOfbirth"),
-    @NamedQuery(name = "Student.findByNationality", query = "SELECT s FROM Student s WHERE s.nationality = :nationality"),
-    @NamedQuery(name = "Student.findByDisabilitiesStatus", query = "SELECT s FROM Student s WHERE s.disabilitiesStatus = :disabilitiesStatus"),
-    @NamedQuery(name = "Student.findByHometown", query = "SELECT s FROM Student s WHERE s.hometown = :hometown"),
-    @NamedQuery(name = "Student.findByRelationToGuardian", query = "SELECT s FROM Student s WHERE s.relationToGuardian = :relationToGuardian"),
-    @NamedQuery(name = "Student.findByResidenceOfAffiliation", query = "SELECT s FROM Student s WHERE s.residenceOfAffiliation = :residenceOfAffiliation"),
-    @NamedQuery(name = "Student.findByGuardianName", query = "SELECT s FROM Student s WHERE s.guardianName = :guardianName"),
-    @NamedQuery(name = "Student.findByGuardianOccupation", query = "SELECT s FROM Student s WHERE s.guardianOccupation = :guardianOccupation"),
-    @NamedQuery(name = "Student.findByGuardianContactNumber", query = "SELECT s FROM Student s WHERE s.guardianContactNumber = :guardianContactNumber"),
-    @NamedQuery(name = "Student.findByOtherContact", query = "SELECT s FROM Student s WHERE s.otherContact = :otherContact"),
-    @NamedQuery(name = "Student.findByRegion", query = "SELECT s FROM Student s WHERE s.region = :region"),
-    @NamedQuery(name = "Student.findByHouseNumber", query = "SELECT s FROM Student s WHERE s.houseNumber = :houseNumber"),
-    @NamedQuery(name = "Student.findByStudentAcademicStatus", query = "SELECT s FROM Student s WHERE s.studentAcademicStatus = :studentAcademicStatus"),
-    @NamedQuery(name = "Student.findByResidenceStatus", query = "SELECT s FROM Student s WHERE s.residenceStatus = :residenceStatus"),
-    @NamedQuery(name = "Student.findByAssignedProgramme", query = "SELECT s FROM Student s WHERE s.assignedProgramme = :assignedProgramme"),
-    @NamedQuery(name = "Student.findByAssignedClass", query = "SELECT s FROM Student s WHERE s.assignedClass = :assignedClass"),
-    @NamedQuery(name = "Student.findByDateOfAdmission", query = "SELECT s FROM Student s WHERE s.dateOfAdmission = :dateOfAdmission"),
-    @NamedQuery(name = "Student.findByAcademicLevel", query = "SELECT s FROM Student s WHERE s.academicLevel = :academicLevel"),
-    @NamedQuery(name = "Student.findByStudentPassword", query = "SELECT s FROM Student s WHERE s.studentPassword = :studentPassword"),
-    @NamedQuery(name = "Student.findByAdmissionPersonnel", query = "SELECT s FROM Student s WHERE s.admissionPersonnel = :admissionPersonnel"),
-    @NamedQuery(name = "Student.findByStudentPixId", query = "SELECT s FROM Student s WHERE s.studentPixId = :studentPixId"),
-    @NamedQuery(name = "Student.findByLastModifiedDate", query = "SELECT s FROM Student s WHERE s.lastModifiedDate = :lastModifiedDate"),
-    @NamedQuery(name = "Student.findByLastModifiedBy", query = "SELECT s FROM Student s WHERE s.lastModifiedBy = :lastModifiedBy"),
-    @NamedQuery(name = "Student.findByDeleted", query = "SELECT s FROM Student s WHERE s.deleted = :deleted"),
-    @NamedQuery(name = "Student.findByUpdated", query = "SELECT s FROM Student s WHERE s.updated = :updated")})
-public class Student implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 35)
-    @Column(name = "student_id", nullable = false, length = 35)
-    private String studentId;
-    @Size(max = 79)
-    @Column(name = "surname", length = 79)
+    @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s")})
+public class Student extends CommonEntity {
+
+    @Column(name = "surname")
     private String surname;
-    @Size(max = 79)
-    @Column(name = "othernames", length = 79)
+
+    @Column(name = "othernames")
     private String othernames;
+
     @Column(name = "gender")
     private Character gender;
+
     @Column(name = "date_Of_birth")
     @Temporal(TemporalType.DATE)
     private Date dateOfbirth;
-    @Size(max = 2)
-    @Column(name = "nationality", length = 2)
-    private String nationality;
+
+    @JoinColumn(name = "nationality")
+    @ManyToOne
+    private Nationality nationality;
+
     @Column(name = "disabilities_status")
     private Character disabilitiesStatus;
-    @Lob
-    @Size(max = 16777215)
-    @Column(name = "disabilities_detail", length = 16777215)
+
+    @Column(name = "disabilities_detail")
     private String disabilitiesDetail;
-    @Size(max = 79)
-    @Column(name = "hometown", length = 79)
+
+    @Column(name = "hometown")
     private String hometown;
-    @Size(max = 2)
-    @Column(name = "relation_to_guardian", length = 2)
-    private String relationToGuardian;
-    @Size(max = 35)
-    @Column(name = "residence_of_affiliation", length = 35)
-    private String residenceOfAffiliation;
-    @Size(max = 79)
-    @Column(name = "guardian_name", length = 79)
+
+    @JoinColumn(name = "relation_to_guardian")
+    @ManyToOne
+    private KinRelation relationToGuardian;
+
+    @JoinColumn(name = "residence_of_affiliation")
+    @ManyToOne
+    private SchoolHouse residenceOfAffiliation;
+
+    @Column(name = "guardian_name")
     private String guardianName;
-    @Size(max = 15)
-    @Column(name = "guardian_occupation", length = 15)
-    private String guardianOccupation;
-    @Size(max = 15)
-    @Column(name = "guardian_contact_number", length = 15)
+
+    @JoinColumn(name = "guardian_occupation")
+    @ManyToOne
+    private Occupation guardianOccupation;
+
+    @Column(name = "guardian_contact_number")
     private String guardianContactNumber;
-    @Size(max = 15)
-    @Column(name = "other_contact", length = 15)
+
+    @Column(name = "other_contact")
     private String otherContact;
-    @Lob
-    @Size(max = 65535)
-    @Column(name = "guardian_postal_address", length = 65535)
+
+    @Column(name = "guardian_postal_address")
     private String guardianPostalAddress;
-    @Lob
-    @Size(max = 65535)
-    @Column(name = "guardian_physical_address", length = 65535)
+
+    @Column(name = "guardian_physical_address")
     private String guardianPhysicalAddress;
-    @Size(max = 15)
-    @Column(name = "region", length = 15)
-    private String region;
-    @Size(max = 55)
-    @Column(name = "house_number", length = 55)
+
+    @JoinColumn(name = "region")
+    @ManyToOne
+    private Region region;
+
+    @Column(name = "house_number")
     private String houseNumber;
-    @Size(max = 2)
-    @Column(name = "student_academic_status", length = 2)
-    private String studentAcademicStatus;
-    @Size(max = 15)
-    @Column(name = "residence_status", length = 15)
-    private String residenceStatus;
-    @Size(max = 35)
-    @Column(name = "assigned_programme", length = 35)
-    private String assignedProgramme;
-    @Size(max = 35)
-    @Column(name = "assigned_class", length = 35)
-    private String assignedClass;
+
+    @JoinColumn(name = "student_academic_status")
+    @ManyToOne
+    private StudentAcademicStatus studentAcademicStatus;
+
+    @JoinColumn(name = "residence_status")
+    @ManyToOne
+    private ResidenceStatus residenceStatus;
+
+    @JoinColumn(name = "assigned_programme")
+    @ManyToOne
+    private InstitutionProgram assignedProgramme;
+
+    @JoinColumn(name = "assigned_class")
+    @ManyToOne
+    private InstitutionClass assignedClass;
+
     @Column(name = "date_of_admission")
     @Temporal(TemporalType.DATE)
     private Date dateOfAdmission;
-    @Size(max = 35)
-    @Column(name = "academic_level", length = 35)
-    private String academicLevel;
-    @Size(max = 79)
-    @Column(name = "student_password", length = 79)
+
+    @JoinColumn(name = "academic_level")
+    @ManyToOne
+    private AcademicLevel academicLevel;
+
+    @Column(name = "student_password")
     private String studentPassword;
-    @Size(max = 79)
-    @Column(name = "admission_personnel", length = 79)
+
+    @Column(name = "admission_personnel")
     private String admissionPersonnel;
-    @Size(max = 35)
-    @Column(name = "student_pix_id", length = 35)
+
+    @Column(name = "student_pix_id")
     private String studentPixId;
-    @Column(name = "last_modified_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
-    @Size(max = 79)
-    @Column(name = "last_modified_by", length = 79)
-    private String lastModifiedBy;
-    @Column(name = "deleted")
-    private Character deleted;
-    @Column(name = "updated")
-    private Character updated;
 
     public Student() {
-    }
-
-    public Student(String studentId) {
-        this.studentId = studentId;
-    }
-
-    public String getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
     }
 
     public String getSurname() {
@@ -208,11 +154,11 @@ public class Student implements Serializable {
         this.dateOfbirth = dateOfbirth;
     }
 
-    public String getNationality() {
+    public Nationality getNationality() {
         return nationality;
     }
 
-    public void setNationality(String nationality) {
+    public void setNationality(Nationality nationality) {
         this.nationality = nationality;
     }
 
@@ -240,20 +186,44 @@ public class Student implements Serializable {
         this.hometown = hometown;
     }
 
-    public String getRelationToGuardian() {
+    public KinRelation getRelationToGuardian() {
         return relationToGuardian;
     }
 
-    public void setRelationToGuardian(String relationToGuardian) {
+    public void setRelationToGuardian(KinRelation relationToGuardian) {
         this.relationToGuardian = relationToGuardian;
     }
 
-    public String getResidenceOfAffiliation() {
+    public SchoolHouse getResidenceOfAffiliation() {
         return residenceOfAffiliation;
     }
 
-    public void setResidenceOfAffiliation(String residenceOfAffiliation) {
+    public void setResidenceOfAffiliation(SchoolHouse residenceOfAffiliation) {
         this.residenceOfAffiliation = residenceOfAffiliation;
+    }
+
+    public ResidenceStatus getResidenceStatus() {
+        return residenceStatus;
+    }
+
+    public void setResidenceStatus(ResidenceStatus residenceStatus) {
+        this.residenceStatus = residenceStatus;
+    }
+
+    public InstitutionClass getAssignedClass() {
+        return assignedClass;
+    }
+
+    public void setAssignedClass(InstitutionClass assignedClass) {
+        this.assignedClass = assignedClass;
+    }
+
+    public AcademicLevel getAcademicLevel() {
+        return academicLevel;
+    }
+
+    public void setAcademicLevel(AcademicLevel academicLevel) {
+        this.academicLevel = academicLevel;
     }
 
     public String getGuardianName() {
@@ -264,11 +234,11 @@ public class Student implements Serializable {
         this.guardianName = guardianName;
     }
 
-    public String getGuardianOccupation() {
+    public Occupation getGuardianOccupation() {
         return guardianOccupation;
     }
 
-    public void setGuardianOccupation(String guardianOccupation) {
+    public void setGuardianOccupation(Occupation guardianOccupation) {
         this.guardianOccupation = guardianOccupation;
     }
 
@@ -304,11 +274,11 @@ public class Student implements Serializable {
         this.guardianPhysicalAddress = guardianPhysicalAddress;
     }
 
-    public String getRegion() {
+    public Region getRegion() {
         return region;
     }
 
-    public void setRegion(String region) {
+    public void setRegion(Region region) {
         this.region = region;
     }
 
@@ -320,36 +290,20 @@ public class Student implements Serializable {
         this.houseNumber = houseNumber;
     }
 
-    public String getStudentAcademicStatus() {
+    public StudentAcademicStatus getStudentAcademicStatus() {
         return studentAcademicStatus;
     }
 
-    public void setStudentAcademicStatus(String studentAcademicStatus) {
+    public void setStudentAcademicStatus(StudentAcademicStatus studentAcademicStatus) {
         this.studentAcademicStatus = studentAcademicStatus;
     }
 
-    public String getResidenceStatus() {
-        return residenceStatus;
-    }
-
-    public void setResidenceStatus(String residenceStatus) {
-        this.residenceStatus = residenceStatus;
-    }
-
-    public String getAssignedProgramme() {
+    public InstitutionProgram getAssignedProgramme() {
         return assignedProgramme;
     }
 
-    public void setAssignedProgramme(String assignedProgramme) {
+    public void setAssignedProgramme(InstitutionProgram assignedProgramme) {
         this.assignedProgramme = assignedProgramme;
-    }
-
-    public String getAssignedClass() {
-        return assignedClass;
-    }
-
-    public void setAssignedClass(String assignedClass) {
-        this.assignedClass = assignedClass;
     }
 
     public Date getDateOfAdmission() {
@@ -358,14 +312,6 @@ public class Student implements Serializable {
 
     public void setDateOfAdmission(Date dateOfAdmission) {
         this.dateOfAdmission = dateOfAdmission;
-    }
-
-    public String getAcademicLevel() {
-        return academicLevel;
-    }
-
-    public void setAcademicLevel(String academicLevel) {
-        this.academicLevel = academicLevel;
     }
 
     public String getStudentPassword() {
@@ -392,61 +338,4 @@ public class Student implements Serializable {
         this.studentPixId = studentPixId;
     }
 
-    public Date getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public void setLastModifiedDate(Date lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public Character getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Character deleted) {
-        this.deleted = deleted;
-    }
-
-    public Character getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Character updated) {
-        this.updated = updated;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (studentId != null ? studentId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Student)) {
-            return false;
-        }
-        Student other = (Student) object;
-        if ((this.studentId == null && other.studentId != null) || (this.studentId != null && !this.studentId.equals(other.studentId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "haams.ejb.entities.Student[ studentId=" + studentId + " ]";
-    }
-    
 }

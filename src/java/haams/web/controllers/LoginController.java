@@ -19,15 +19,16 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
  * @author AbdulMumin
  */
-@ManagedBean
+@Named
 @RequestScoped
 public class LoginController implements Serializable {
 
@@ -49,9 +50,6 @@ public class LoginController implements Serializable {
     Date sessionDate;
     
     UserAccount userAccount = new UserAccount();
-    
-    //HttpSession httpSession = SessionClass.getSession();
-    //MenuConfiguration mnuConf = new MenuConfiguration();
     
     //</editor-fold>
 
@@ -98,6 +96,8 @@ public class LoginController implements Serializable {
 
                 userSession.setSchoolName(configuration.get(0).getInstitutionName());
                 userSession.setSchoolAddress(configuration.get(0).getInstitutionAddress());
+                userSession.setSchoolConfig(configuration);
+                userSession.setSetting(setting);
 
                 if (ar.getAccessRightId().equals("10")) {
                     
@@ -133,14 +133,10 @@ public class LoginController implements Serializable {
         }
     }
 
-//    public UserAccount getCurrentUser() {
-//        httpSession = SessionClass.getSession();
-//        return (UserAccount) httpSession.getAttribute("userAccount");
-//    }
-
-    public String logout() {
-        return "";
+    public void logout() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
     }
+
 
     //<editor-fold defaultstate="collapsed" desc="Change Password">
 //    public String renderChangePasswordPage() {

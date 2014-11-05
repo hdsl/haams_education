@@ -6,9 +6,13 @@
 
 package haams.web.utils;
 
+import haams.ejb.entities.AcademicTerm;
+import haams.ejb.entities.EducationalInstitution;
+import haams.ejb.entities.Setting;
 import haams.ejb.entities.UserAccount;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -26,6 +30,10 @@ public class UserSession implements Serializable
     private String academicTerm;
     private String schoolName;
     private String schoolAddress;
+    private List<EducationalInstitution> schoolConfig;
+    
+    private Setting setting;
+    
     private UserAccount userAccount;
 
     public String getUsername() {
@@ -42,6 +50,22 @@ public class UserSession implements Serializable
 
     public void setSchoolName(String schoolName) {
         this.schoolName = schoolName;
+    }
+
+    public Setting getSetting() {
+        return setting;
+    }
+
+    public void setSetting(Setting setting) {
+        this.setting = setting;
+    }
+
+    public List<EducationalInstitution> getSchoolConfig() {
+        return schoolConfig;
+    }
+
+    public void setSchoolConfig(List<EducationalInstitution> schoolConfig) {
+        this.schoolConfig = schoolConfig;
     }
 
     public String getSchoolAddress() {

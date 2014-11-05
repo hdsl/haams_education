@@ -2,156 +2,154 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
-    <ui:composition template="welcome.xhtml">
-        <ui:define name="controls">
-            <p:messages/>
+    <h:body>
 
-            <h:panelGroup layout="block">
-                <h:form>
-                    <p:panel style="overflow: auto">
-                        <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Student Registration</span></f:facet>
+        <p:messages/>
 
-                        <div class="lessee_info_div">
-                            <p:panel>
-                                <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Personal Details</span></f:facet>
-                                <h:panelGrid columns="6" style="margin-left: -20px">
-                                    <h:outputLabel value="Surname:" style="float: right"/>
-                                    <h:inputText value="#{studentController.surname}"/>
-                                    <h:outputLabel value="Other Name:" style="float: right"/>
-                                    <h:inputText value="#{studentController.othername}"/>
-                                    <h:outputLabel value="Gender:" style="float: right"/>
-                                    <h:selectOneMenu value="#{studentController.student.gender}" styleClass="textarea" >
-                                        <f:selectItem itemLabel="...Select..." itemValue="0"/>
-                                        <f:selectItem itemLabel="Female" itemValue="F"/>
-                                        <f:selectItem itemLabel="Male" itemValue="M"/>
-                                    </h:selectOneMenu>
-                                    <h:outputLabel value="Date of Birth:" style="float: right"/>
-                                    <p:calendar showOn="button" navigator="true" size="13"
-                                                value="#{studentController.dateOfbirth}"/>
-                                    <h:outputLabel value="Nationality:" style="float: right"/>
-                                    <h:selectOneMenu  value="#{studentController.student.nationality}" styleClass="textarea" >
-                                        <f:selectItems value="#{commonOptions.nationality}"/>
-                                    </h:selectOneMenu>
-                                    <h:outputLabel value="Hometown:" style="float: right"/>                                    
-                                    <h:inputText  value="#{studentController.student.hometown}"/>
-                                    <h:outputLabel value="Region of Origin:" style="float: right"/>
-                                    <h:selectOneMenu  value="#{studentController.student.region}" styleClass="textarea" >
-                                        <f:selectItems value="#{commonOptions.regionOptions}"/>
-                                    </h:selectOneMenu>
-                                    <h:outputLabel value="Disability/Allergy:" style="float: right"/>
-                                    <h:selectOneMenu value="#{studentController.student.disabilitiesStatus}" styleClass="textarea">
-                                        <f:selectItem itemLabel="NO" itemValue="N"/>
-                                        <f:selectItem itemLabel="YES" itemValue="Y"/>
-                                    </h:selectOneMenu>
-                                    <h:outputLabel value="Details:" style="float: right"/>
-                                    <h:inputTextarea value="#{studentController.student.disabilitiesDetail}"/>
-                                </h:panelGrid>
-                            </p:panel>
+        <h:form>
+            <p:panel style="overflow: auto">
+                <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Student Data Entry/Update</span></f:facet>
 
-                            <p:panel style="margin-top: 10px">
-                                <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Guardian Details</span></f:facet>
-                                <h:panelGrid columns="6" style="margin-left: -20px">
-                                    <h:outputLabel value="Name:" style="float: right"/>
-                                    <h:inputText  value="#{studentController.student.guardianName}"/>
-                                    <h:outputLabel value="Primary Contact:" style="float: right"/>
-                                    <p:inputMask mask="9999999999"  value="#{studentController.student.guardianContactNumber}"/>
-                                    <h:outputLabel value="Other Contact:" style="float: right"/>
-                                    <p:inputMask mask="9999999999"  value="#{studentController.student.otherContact}"/>
-                                    <h:outputLabel value="Hse. Number:" style="float: right"/>
-                                    <h:inputText  value="#{studentController.student.houseNumber}"/>
-                                    <h:outputLabel value="Occupation:" style="float: right"/>
-                                    <h:selectOneMenu value="#{studentController.student.guardianOccupation}" styleClass="textarea" >
-                                        <f:selectItems value="#{commonOptions.occupationTypeOptions}"/>
-                                    </h:selectOneMenu>
-                                    <h:outputLabel value="Relation To Student:" style="float: right"/>
-                                    <h:selectOneMenu value="#{studentController.student.relationToGuardian}" styleClass="textarea" >
-                                        <f:selectItems value="#{commonOptions.kinRelationOptions}"/>
-                                    </h:selectOneMenu>
-                                    <h:outputLabel value="Land Mark:" style="float: right"/>
-                                    <h:inputTextarea  value="#{studentController.student.guardianPhysicalAddress}"/>
-                                    <h:outputLabel value="Postal Address:" style="float: right"/>
-                                    <h:inputTextarea  value="#{studentController.student.guardianPostalAddress}"/>
-                                    
-                                </h:panelGrid>
-                            </p:panel>
-
-                            <p:panel style="margin-top: 10px">
-                                <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Admission Details</span></f:facet>
-                                <h:panelGrid columns="6" style="margin-left: -20px">
-                                    <h:outputLabel value="Date of Admission" style="float: right"/>
-                                    <p:calendar showOn="button" navigator="true" size="12"
-                                                value="#{studentController.dateOfAdmission}"/>
-                                    <h:outputLabel value="Course:" style="float: right"/>
-                                    <h:selectOneMenu styleClass="textarea" value="#{studentController.assignedProgramme}">
-                                        <p:ajax event="change" update="academicLevel" listener="#{studentController.resetAssignedProgram}"/>
-                                        <f:selectItem itemLabel="...Select One..." itemValue=""/>
-                                        <f:selectItems value="#{commonOptions.academicCoursesOptions}"/>
-                                    </h:selectOneMenu>
-                                    <h:outputLabel value="Academic Level:" style="float: right"/>
-                                    <h:selectOneMenu id="academicLevel" styleClass="textarea" value="#{studentController.academicLevel}">
-                                        <f:selectItem itemLabel="...Select One..." itemValue=""/>
-                                        <f:selectItems value="#{studentController.academicLevelOptions}"/>
-                                        <p:ajax event="change" listener="#{studentController.loadAcademicLevelClass()}" update="classAdmitted"/>
-                                    </h:selectOneMenu>
-                                    <h:outputLabel value="Class Admitted To:" style="float: right"/>
-                                    <h:selectOneMenu id="classAdmitted" styleClass="textarea" value="#{studentController.assignedClass}">
-                                        <f:selectItem itemLabel="...Select One..." itemValue=""/>
-                                        <f:selectItems value="#{studentController.classAdmitted}"/>
-                                    </h:selectOneMenu>
-                                    <h:outputLabel value="House of Affiliation:" style="float: right"/>
-                                    <h:selectOneMenu  styleClass="textarea" value="#{studentController.student.residenceOfAffiliation}">
-                                        <f:selectItem itemLabel="...Select One..." itemValue=""/>
-                                        <f:selectItems value="#{commonOptions.schoolHouseOptions}"/>
-                                    </h:selectOneMenu>
-                                    <h:outputLabel value="Residence Status:" style="float: right"/>
-                                    <h:selectOneMenu  styleClass="textarea" value="#{studentController.student.residenceStatus}">
-                                        <f:selectItems value="#{commonOptions.boardingStatusOptions}"/>
-                                    </h:selectOneMenu>
-                                    <h:outputLabel value="Current Status:" style="float: right"/>
-                                    <h:selectOneMenu value="#{studentController.student.studentAcademicStatus}" styleClass="textarea" >
-                                        <f:selectItems value="#{commonOptions.academicStatusOptions}"/>
-                                    </h:selectOneMenu>
-                                </h:panelGrid>
-                            </p:panel>
-
-                            <h:panelGrid columns="3" style="margin-top: 20px">
-                                <p:commandButton value="#{studentController.saveEditButtonText}" styleClass="buttons"
-                                                 icon="ui-icon-disk" ajax="false"
-                                                 action="#{studentController.saveEditButtonAction()}"/>
-                                <p:commandButton value="Clear" styleClass="buttons"
-                                                 icon="ui-icon-cancel" ajax="false"
-                                                 action="#{studentController.resetButtonAction()}"/>
-                            </h:panelGrid>
-                        </div>
-                        <div class="lessee_pix_div">
-                            <p:panel>
-
-                                <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Picture</span></f:facet>
-
-                                <h:panelGrid columns="1">
-                                    <img height="120px;" width="120px;" src="#{studentController.studentPix}"
-                                         style="display: block; border: solid #f9dd34 1px;" id="clientPicture"/>
-
-                                    <p:fileUpload fileUploadListener="#{studentController.studentPixUpload}" mode="advanced"  
-                                                  sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" auto="true"
-                                                  oncomplete="javascript:window.location.reload()"/>  
-
-                                    <h:outputLabel style="margin-left: -3px;color: red;font-size: 14px" value="Please upload picture before moving on to ADMISSION DETAIL SECTION"/>
-                                </h:panelGrid>
-
-
-                            </p:panel>
-
-                        </div>
+                <div class="lessee_info_div">
+                    <p:panel>
+                        <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Personal Details</span></f:facet>
+                        <h:panelGrid columns="6" style="margin-left: -20px">
+                            <h:outputLabel value="Surname:"/>
+                            <h:inputText value="#{studentController.surname}"/>
+                            <h:outputLabel value="Other Name:"/>
+                            <h:inputText value="#{studentController.othername}"/>
+                            <h:outputLabel value="Gender:"/>
+                            <h:selectOneMenu value="#{studentController.student.gender}" styleClass="textarea" >
+                                <f:selectItem itemLabel="...Select..." itemValue="0"/>
+                                <f:selectItem itemLabel="Female" itemValue="F"/>
+                                <f:selectItem itemLabel="Male" itemValue="M"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel value="Date of Birth:"/>
+                            <p:calendar showOn="button" navigator="true" size="13"
+                                        value="#{studentController.dateOfbirth}"/>
+                            <h:outputLabel value="Nationality:"/>
+                            <h:selectOneMenu  value="#{studentController.student.nationality}" styleClass="textarea" >
+                                <f:selectItems value="#{commonOptions.nationality}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel value="Hometown:"/>                                    
+                            <h:inputText  value="#{studentController.student.hometown}"/>
+                            <h:outputLabel value="Region of Origin:"/>
+                            <h:selectOneMenu  value="#{studentController.student.region}" styleClass="textarea" >
+                                <f:selectItems value="#{commonOptions.regionOptions}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel value="Disability/Allergy:"/>
+                            <h:selectOneMenu value="#{studentController.student.disabilitiesStatus}" styleClass="textarea">
+                                <f:selectItem itemLabel="NO" itemValue="N"/>
+                                <f:selectItem itemLabel="YES" itemValue="Y"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel value="Details:"/>
+                            <h:inputTextarea value="#{studentController.student.disabilitiesDetail}"/>
+                        </h:panelGrid>
                     </p:panel>
 
-                </h:form>
-            </h:panelGroup>
-        </ui:define>
-    </ui:composition>
+                    <p:panel style="margin-top: 10px">
+                        <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Guardian Details</span></f:facet>
+                        <h:panelGrid columns="6" style="margin-left: -20px">
+                            <h:outputLabel value="Name:"/>
+                            <h:inputText  value="#{studentController.student.guardianName}"/>
+                            <h:outputLabel value="Primary Contact:"/>
+                            <p:inputMask mask="9999999999"  value="#{studentController.student.guardianContactNumber}"/>
+                            <h:outputLabel value="Other Contact:"/>
+                            <p:inputMask mask="9999999999"  value="#{studentController.student.otherContact}"/>
+                            <h:outputLabel value="House Number:"/>
+                            <h:inputText  value="#{studentController.student.houseNumber}"/>
+                            <h:outputLabel value="Land Mark:"/>
+                            <h:inputTextarea  value="#{studentController.student.guardianPhysicalAddress}"/>
+                            <h:outputLabel value="Postal Address:"/>
+                            <h:inputTextarea  value="#{studentController.student.guardianPostalAddress}"/>
+                            <h:outputLabel value="Occupation:"/>
+                            <h:selectOneMenu value="#{studentController.student.guardianOccupation}" styleClass="textarea" >
+                                <f:selectItems value="#{commonOptions.occupationTypeOptions}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel value="Relation To Student:"/>
+                            <h:selectOneMenu value="#{studentController.student.relationToGuardian}" styleClass="textarea" >
+                                <f:selectItems value="#{commonOptions.kinRelationOptions}"/>
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                    </p:panel>
+
+
+                    <p:panel style="margin-top: 10px">
+                        <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Admission Details</span></f:facet>
+                        <h:panelGrid columns="6" style="margin-left: -20px">
+                            <h:outputLabel value="Date of Admission"/>
+                            <p:calendar showOn="button" navigator="true" size="12"
+                                        value="#{studentController.dateOfAdmission}"/>
+                            <h:outputLabel value="Course:"/>
+                            <h:selectOneMenu styleClass="textarea" value="#{studentController.assignedProgramme}">
+                                <p:ajax event="change" update="academicLevel" listener="#{studentController.resetAssignedProgram}"/>
+                                <f:selectItem itemLabel="...Select One..." itemValue=""/>
+                                <f:selectItems value="#{commonOptions.academicCoursesOptions}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel value="Academic Level:"/>
+                            <h:selectOneMenu id="academicLevel" styleClass="textarea" value="#{studentController.academicLevel}">
+                                <f:selectItem itemLabel="...Select One..." itemValue=""/>
+                                <f:selectItems value="#{studentController.academicLevelOptions}"/>
+                                <p:ajax event="change" listener="#{studentController.loadAcademicLevelClass()}" update="classAdmitted1"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel value="Class Admitted To:"/>
+                            <h:selectOneMenu id="classAdmitted1" styleClass="textarea" value="#{studentController.assignedClass}">
+                                <f:selectItem itemLabel="...Select One..." itemValue=""/>
+                                <f:selectItems value="#{studentController.classAdmitted}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel value="House of Affiliation:"/>
+                            <h:selectOneMenu  styleClass="textarea" value="#{studentController.student.residenceOfAffiliation}">
+                                <f:selectItem itemLabel="...Select One..." itemValue=""/>
+                                <f:selectItems value="#{commonOptions.schoolHouseOptions}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel value="Residence Status:"/>
+                            <h:selectOneMenu  styleClass="textarea" value="#{studentController.student.residenceStatus}">
+                                <f:selectItems value="#{commonOptions.boardingStatusOptions}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel value="Current Status:"/>
+                            <h:selectOneMenu value="#{studentController.student.studentAcademicStatus}" styleClass="textarea" >
+                                <f:selectItems value="#{commonOptions.academicStatusOptions}"/>
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <center>
+                        <h:panelGrid columns="3" style="margin-top: 20px">
+                            <p:commandButton value="#{studentController.saveEditButtonText}" styleClass="buttons"
+                                             icon="ui-icon-disk" ajax="false"
+                                             action="#{studentController.saveEditButtonAction()}"/>
+                            <p:commandButton 
+                                value="Return" action="#{studentController.returnToStudentDataViewPanel}"
+                                icon="ui-icon-arrowthick-1-w" ajax="false"
+                                update=":studentListForm"/>
+                        </h:panelGrid>
+                    </center>
+                </div>
+                <div class="lessee_pix_div">
+                    <p:panel>
+
+                        <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Picture</span></f:facet>
+
+                        <h:panelGrid columns="1">
+                            <img height="120px;" width="120px;" src="#{studentController.studentPix}"
+                                 style="display: block; border: solid #f9dd34 1px;" id="clientPicture"/>
+
+                            <p:fileUpload fileUploadListener="#{studentController.studentPixUpload}" mode="advanced"  
+                                          sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" auto="true"
+                                          oncomplete="javascript:window.location.reload()"/>  
+
+                        </h:panelGrid>
+
+
+                    </p:panel>
+
+                </div>
+            </p:panel>
+
+        </h:form>
+    </h:body>
 </html>
 

@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:body>
+        <p:messages/>
+
+        <p:panel>
+            <f:facet name="header"><span style="font-weight: bolder;font-variant: small-caps">Students House/Hall of Residence</span></f:facet>
+
+            <h:form>
+                <h:panelGrid columns="4" style="margin-top: 10px">
+                    <h:outputLabel value="House/Hall Name:"/>
+                    <h:inputText value="#{residenceController.schoolHouse.houseName}"/>
+                    <h:outputLabel value="Gender:"/>
+                    <h:selectOneMenu value="#{residenceController.schoolHouse.gender}" styleClass="textarea" >
+                        <f:selectItem itemLabel="...Select..." itemValue="0"/>
+                        <f:selectItem itemLabel="Female" itemValue="F"/>
+                        <f:selectItem itemLabel="Male" itemValue="M"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="House Master:"/>
+                    <h:inputText value="#{residenceController.schoolHouse.houseMaster}"/>
+                </h:panelGrid>
+
+                <h:panelGrid columns="4" style="margin-top: 20px">
+                    <p:commandButton value="#{residenceController.saveEditButtonText}" 
+                                     icon="ui-icon-disk" ajax="false"
+                                     action="#{residenceController.saveEditButtonAction()}"/>
+                    <p:commandButton value="Clear" icon="ui-icon-cancel" ajax="false"
+                                     action="#{residenceController.resetButtonAction()}"/>
+                </h:panelGrid>
+
+            </h:form>
+
+            <h:form>
+                <p:dataTable var="residence" style="margin-top: 20px;width: 600px"
+                             value="#{residenceView.studentResidenceList}">     
+                    <p:column>
+                        <f:facet name="header">House Name</f:facet>
+                        <h:outputText value="#{residence.houseName}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Gender</f:facet>
+                        <h:outputText value="#{residence.gender}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">House Master</f:facet>
+                        <h:outputText value="#{residence.houseMaster}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header"></f:facet>
+                        <p:commandLink value="Edit" style="text-decoration: none;color:blue"
+                                       action="#{residenceController.rowSelectDataAction(residence)}"
+                                       ajax="false"/>
+                        <p:commandLink value="Delete" style="text-decoration: none;color: red;margin-left: 20px"
+                                       action="#{residenceController.deleteButtonAction(residence)}"
+                                       onclick="confirm('Are you sure you want to delete?')"
+                                       ajax="false"/>
+                    </p:column>
+                </p:dataTable>
+
+            </h:form>
+        </p:panel>
+    </h:body>
+</html>
+

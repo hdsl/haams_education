@@ -16,29 +16,25 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author HDSL_MUMIN
+ * @author AbdulMumin
  */
 @Entity
-@Table(name = "staff_category", catalog = "haams_edu", schema = "")
-@XmlRootElement
+@Table(name = "staff_category")
 @NamedQueries({
-    @NamedQuery(name = "StaffCategory.findAll", query = "SELECT s FROM StaffCategory s"),
-    @NamedQuery(name = "StaffCategory.findByStaffCategoryId", query = "SELECT s FROM StaffCategory s WHERE s.staffCategoryId = :staffCategoryId"),
-    @NamedQuery(name = "StaffCategory.findByStaffCategoryDesc", query = "SELECT s FROM StaffCategory s WHERE s.staffCategoryDesc = :staffCategoryDesc")})
+    @NamedQuery(name = "StaffCategory.findAll", query = "SELECT s FROM StaffCategory s")})
 public class StaffCategory implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2)
-    @Column(name = "staff_category_id", nullable = false, length = 2)
+    @Column(name = "staff_category_id")
     private String staffCategoryId;
     @Size(max = 45)
-    @Column(name = "staff_category_desc", length = 45)
+    @Column(name = "staff_category_desc")
     private String staffCategoryDesc;
 
     public StaffCategory() {
@@ -86,7 +82,7 @@ public class StaffCategory implements Serializable {
 
     @Override
     public String toString() {
-        return "haams.ejb.entities.StaffCategory[ staffCategoryId=" + staffCategoryId + " ]";
+        return "haamsEdu.ejb.entities.StaffCategory[ staffCategoryId=" + staffCategoryId + " ]";
     }
     
 }

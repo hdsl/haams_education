@@ -16,29 +16,25 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author HDSL_MUMIN
+ * @author AbdulMumin
  */
 @Entity
-@Table(name = "residence_status", catalog = "haams_edu", schema = "")
-@XmlRootElement
+@Table(name = "residence_status")
 @NamedQueries({
-    @NamedQuery(name = "ResidenceStatus.findAll", query = "SELECT r FROM ResidenceStatus r"),
-    @NamedQuery(name = "ResidenceStatus.findByResidenceStatusId", query = "SELECT r FROM ResidenceStatus r WHERE r.residenceStatusId = :residenceStatusId"),
-    @NamedQuery(name = "ResidenceStatus.findByResidenceStatusDesc", query = "SELECT r FROM ResidenceStatus r WHERE r.residenceStatusDesc = :residenceStatusDesc")})
+    @NamedQuery(name = "ResidenceStatus.findAll", query = "SELECT r FROM ResidenceStatus r")})
 public class ResidenceStatus implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 15)
-    @Column(name = "residence_status_id", nullable = false, length = 15)
+    @Column(name = "residence_status_id")
     private String residenceStatusId;
     @Size(max = 35)
-    @Column(name = "residence_status_desc", length = 35)
+    @Column(name = "residence_status_desc")
     private String residenceStatusDesc;
 
     public ResidenceStatus() {
@@ -86,7 +82,7 @@ public class ResidenceStatus implements Serializable {
 
     @Override
     public String toString() {
-        return "haams.ejb.entities.ResidenceStatus[ residenceStatusId=" + residenceStatusId + " ]";
+        return "haamsEdu.ejb.entities.ResidenceStatus[ residenceStatusId=" + residenceStatusId + " ]";
     }
     
 }

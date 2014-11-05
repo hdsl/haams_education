@@ -16,29 +16,25 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author HDSL_MUMIN
+ * @author AbdulMumin
  */
 @Entity
-@Table(name = "level_of_education", catalog = "haams_edu", schema = "")
-@XmlRootElement
+@Table(name = "level_of_education")
 @NamedQueries({
-    @NamedQuery(name = "LevelOfEducation.findAll", query = "SELECT l FROM LevelOfEducation l"),
-    @NamedQuery(name = "LevelOfEducation.findByLevelId", query = "SELECT l FROM LevelOfEducation l WHERE l.levelId = :levelId"),
-    @NamedQuery(name = "LevelOfEducation.findByLevelDescription", query = "SELECT l FROM LevelOfEducation l WHERE l.levelDescription = :levelDescription")})
+    @NamedQuery(name = "LevelOfEducation.findAll", query = "SELECT l FROM LevelOfEducation l")})
 public class LevelOfEducation implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2)
-    @Column(name = "level_id", nullable = false, length = 2)
+    @Column(name = "level_id")
     private String levelId;
     @Size(max = 35)
-    @Column(name = "level_description", length = 35)
+    @Column(name = "level_description")
     private String levelDescription;
 
     public LevelOfEducation() {
@@ -86,7 +82,7 @@ public class LevelOfEducation implements Serializable {
 
     @Override
     public String toString() {
-        return "haams.ejb.entities.LevelOfEducation[ levelId=" + levelId + " ]";
+        return "haamsEdu.ejb.entities.LevelOfEducation[ levelId=" + levelId + " ]";
     }
     
 }

@@ -16,29 +16,25 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author HDSL_MUMIN
+ * @author AbdulMumin
  */
 @Entity
-@Table(name = "marital_status", catalog = "haams_edu", schema = "")
-@XmlRootElement
+@Table(name = "marital_status")
 @NamedQueries({
-    @NamedQuery(name = "MaritalStatus.findAll", query = "SELECT m FROM MaritalStatus m"),
-    @NamedQuery(name = "MaritalStatus.findByMaritalStatusId", query = "SELECT m FROM MaritalStatus m WHERE m.maritalStatusId = :maritalStatusId"),
-    @NamedQuery(name = "MaritalStatus.findByStatusDesc", query = "SELECT m FROM MaritalStatus m WHERE m.statusDesc = :statusDesc")})
+    @NamedQuery(name = "MaritalStatus.findAll", query = "SELECT m FROM MaritalStatus m")})
 public class MaritalStatus implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2)
-    @Column(name = "marital_status_id", nullable = false, length = 2)
+    @Column(name = "marital_status_id")
     private String maritalStatusId;
     @Size(max = 35)
-    @Column(name = "status_desc", length = 35)
+    @Column(name = "status_desc")
     private String statusDesc;
 
     public MaritalStatus() {
@@ -64,29 +60,4 @@ public class MaritalStatus implements Serializable {
         this.statusDesc = statusDesc;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (maritalStatusId != null ? maritalStatusId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof MaritalStatus)) {
-            return false;
-        }
-        MaritalStatus other = (MaritalStatus) object;
-        if ((this.maritalStatusId == null && other.maritalStatusId != null) || (this.maritalStatusId != null && !this.maritalStatusId.equals(other.maritalStatusId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "haams.ejb.entities.MaritalStatus[ maritalStatusId=" + maritalStatusId + " ]";
-    }
-    
 }

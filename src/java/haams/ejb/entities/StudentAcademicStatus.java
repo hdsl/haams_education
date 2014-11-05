@@ -16,29 +16,25 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author HDSL_MUMIN
+ * @author AbdulMumin
  */
 @Entity
-@Table(name = "student_academic_status", catalog = "haams_edu", schema = "")
-@XmlRootElement
+@Table(name = "student_academic_status")
 @NamedQueries({
-    @NamedQuery(name = "StudentAcademicStatus.findAll", query = "SELECT s FROM StudentAcademicStatus s"),
-    @NamedQuery(name = "StudentAcademicStatus.findByStudentAcademicStatusId", query = "SELECT s FROM StudentAcademicStatus s WHERE s.studentAcademicStatusId = :studentAcademicStatusId"),
-    @NamedQuery(name = "StudentAcademicStatus.findByStudentAcademicStatusDesc", query = "SELECT s FROM StudentAcademicStatus s WHERE s.studentAcademicStatusDesc = :studentAcademicStatusDesc")})
+    @NamedQuery(name = "StudentAcademicStatus.findAll", query = "SELECT s FROM StudentAcademicStatus s")})
 public class StudentAcademicStatus implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2)
-    @Column(name = "student_academic_status_id", nullable = false, length = 2)
+    @Column(name = "student_academic_status_id")
     private String studentAcademicStatusId;
     @Size(max = 15)
-    @Column(name = "student_academic_status_desc", length = 15)
+    @Column(name = "student_academic_status_desc")
     private String studentAcademicStatusDesc;
 
     public StudentAcademicStatus() {
@@ -86,7 +82,7 @@ public class StudentAcademicStatus implements Serializable {
 
     @Override
     public String toString() {
-        return "haams.ejb.entities.StudentAcademicStatus[ studentAcademicStatusId=" + studentAcademicStatusId + " ]";
+        return "haamsEdu.ejb.entities.StudentAcademicStatus[ studentAcademicStatusId=" + studentAcademicStatusId + " ]";
     }
     
 }

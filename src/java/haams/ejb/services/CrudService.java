@@ -6,6 +6,7 @@
 package haams.ejb.services;
 
 import haams.ejb.entities.CommonEntity;
+import haams.ejb.entities.GeneratePk;
 import java.util.Collections;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -121,4 +122,39 @@ public class CrudService {
             return Collections.EMPTY_LIST;
         }
     }
+    
+    // <editor-fold defaultstate="collapsed" desc=" GeneratePk Persistence Functionalities">
+    public boolean generatePkUpdate(GeneratePk generatePk) {
+        try {
+
+            em.merge(generatePk);
+            em.flush();
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+
+        }
+    }
+
+    public Integer generatePk(String pkName) {
+        try {
+
+            GeneratePk generatePk = em.find(GeneratePk.class, pkName);
+
+            int in = generatePk.getPkValue();
+            int a = 1 + in;
+
+            generatePk.setPkValue(a);
+
+            em.merge(generatePk);
+            em.flush();
+            return a;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    // </editor-fold>
 }

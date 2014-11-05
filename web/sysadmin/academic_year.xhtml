@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+
+    <h:body>
+
+        <p:messages/>
+
+        <p:panel style="overflow: auto;">
+            <f:facet name="header"><span style="font-weight: bolder;font-variant: small-caps">Academic Year Details</span></f:facet>
+
+            <h:form id="academicYearEntry">
+                <p:panel  style="overflow: auto;">
+                    <h:panelGroup layout="block">
+                        <h:panelGrid columns="6">
+                            <h:outputLabel value="Begin Date:"/>
+                            <p:calendar navigator="true" showOn="button"
+                                        value="#{academicYearController.beginDate}"/>
+                            <h:outputLabel value="End Date:"/>
+                            <p:calendar navigator="true" showOn="button"
+                                        value="#{academicYearController.endDate}"/>
+
+                            <p:commandButton value="#{academicYearController.saveEditButtonText}"
+                                             action="#{academicYearController.saveEditButtonAction()}"
+                                             icon="ui-icon-disk" ajax="false" style="margin-left: 30px"
+                                             update=":academicYearList"/>
+                            <p:commandButton value="Clear" icon="ui-icon-cancel" ajax="false"
+                                             action="#{academicYearController.resetButtonAction()}"/>
+                        </h:panelGrid>
+                    </h:panelGroup>
+                </p:panel>
+            </h:form>
+
+            <h:form id="academicYearList">
+                <p:dataTable  style="margin-top: 40px;width: 500px"
+                              value="#{academicYearView.academicYearList}" var="academic">     
+                    <p:column>
+                        <f:facet name="header">Academic Year</f:facet>
+                        <h:outputText value="#{academic.commonId}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Begin Date</f:facet>
+                        <h:outputText value="#{academic.academicYearBegin}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">End Date</f:facet>
+                        <h:outputText value="#{academic.academicYearEnd}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header"></f:facet>
+                        <p:commandLink value="Edit" style="text-decoration: none;color:blue"
+                                       action="#{academicYearController.rowSelectDataAction(academic)}"
+                                       update=":academicYearEntry" ajax="false"/>
+                        <p:commandLink value="Delete" style="text-decoration: none;color: red;margin-left: 20px"
+                                       action="#{academicYearController.deleteButtonAction(academic)}"
+                                       onclick="confirm('Are you sure you want to delete?')"
+                                       update=":academicYearList" ajax="false"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:panel>
+    </h:body>
+</html>
+

@@ -1,0 +1,300 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:body>
+        <p:messages/>
+        <h:form rendered="#{schoolStaffController.renderStaffListPanel}">
+            <p:panel style="overflow: auto;margin-top: 10px">
+                <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Staff Information</span></f:facet>
+
+                <h:panelGrid columns="7">
+                    <h:outputLabel value="Search Text:"/>
+                    <h:inputText styleClass="textarea" value="#{schoolStaffController.searchText}"/>
+                    <h:selectOneMenu styleClass="textarea" value="#{schoolStaffController.searchAttribute}">
+                        <f:selectItem itemLabel="Staff Id" itemValue="staffId"/>
+                        <f:selectItem itemLabel="Surname" itemValue="surname"/>
+                        <f:selectItem itemLabel="Other Name" itemValue="otherName"/>
+                        <f:selectItem itemLabel="Primary Contact" itemValue="primaryContact"/>
+                        <f:selectItem itemLabel="Staff Category" itemValue="staffCategory"/>
+                    </h:selectOneMenu>
+                    <p:commandButton value="Search" ajax="false" icon="ui-icon-search"
+                                     action="#{schoolStaffController.searchButtonAction()}"/>
+                    <p:commandButton value="View All" ajax="false"  style="margin-left: 10px"
+                                     action="#{schoolStaffController.viewAllStaff()}"/>
+
+                    <p:commandButton  value="New Staff Entry" style="margin-left: 50px"
+                                      icon="ui-icon-plusthick"  ajax="false"
+                                      action="#{schoolStaffController.showNewStaffEntryPanel()}"/>
+                </h:panelGrid>
+
+                <p:dataTable paginator="true" var="staff" rows="20"
+                             value="#{schoolStaffController.staffDetailDataList}"
+                             rowKey="#{staff.staffId}"  
+                             selection="#{schoolStaffController.staffTableModel}"
+                             selectionMode="single"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">  
+
+                    <p:column>
+                        <f:facet name="header">Staff Name</f:facet>
+                        <h:outputText style="text-decoration: none"
+                                      value="#{staff.staffName}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Primary Contact</f:facet>
+                        <h:outputText style="text-decoration: none"
+                                      value="#{staff.staffPrimaryContact}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Email Address</f:facet>
+                        <h:outputText style="text-decoration: none"
+                                      value="#{staff.staffEmailAddress}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Staff Category</f:facet>
+                        <h:outputText style="text-decoration: none"
+                                      value="#{staff.staffCategory}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Status</f:facet>
+                        <h:outputText style="text-decoration: none"
+                                      value="#{staff.occupationStatus}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header"></f:facet>
+                        <p:commandLink ajax="false"  value="View detail" style="text-decoration: none;color: blue;font-size: 11px" 
+                                       action="#{schoolStaffController.rowSelectDataAction(staff)}"
+                                       update=":stdDataViewForm"/>
+                    </p:column>
+                </p:dataTable>
+
+            </p:panel>
+
+        </h:form>
+
+        <h:form rendered="#{schoolStaffController.renderStaffCreatePanel}">
+            <p:panel style="overflow: auto">
+                <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Staff Information Entry/Update</span></f:facet>
+
+                <p:panel>
+                    <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Personal Details</span></f:facet>
+                    <h:panelGrid columns="8" style="margin-left: -20px">
+                        <h:outputLabel value="Surname:" style="float: right"/>
+                        <h:inputText value="#{schoolStaffController.surname}"/>
+                        <h:outputLabel value="Other Name:" style="float: right"/>
+                        <h:inputText value="#{schoolStaffController.othername}"/>
+                        <h:outputLabel value="Gender:" style="float: right"/>
+                        <h:selectOneMenu value="#{schoolStaffController.institutionStaff.gender}" styleClass="textarea" >
+                            <f:selectItem itemLabel="...Select..." itemValue="0"/>
+                            <f:selectItem itemLabel="Female" itemValue="F"/>
+                            <f:selectItem itemLabel="Male" itemValue="M"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="Date of Birth:" style="float: right"/>
+                        <p:calendar showOn="button" navigator="true" size="13"
+                                    value="#{schoolStaffController.institutionStaff.dateOfBirth}"/>                                
+                        <h:outputLabel value="Marital Status:" style="float: right"/>
+                        <h:selectOneMenu  value="#{schoolStaffController.institutionStaff.maritalStatus}" styleClass="textarea" >
+                            <f:selectItems value="#{commonOptions.maritalStatus}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="Nationality:" style="float: right"/>
+                        <h:selectOneMenu  value="#{schoolStaffController.institutionStaff.nationality}" styleClass="textarea" >
+                            <f:selectItems value="#{commonOptions.nationality}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="Hometown:" style="float: right"/>                                    
+                        <h:inputText  value="#{schoolStaffController.institutionStaff.hometown}"/>
+                        <h:outputLabel value="Region:" style="float: right"/>
+                        <h:selectOneMenu  value="#{schoolStaffController.institutionStaff.regionId}" styleClass="textarea" >
+                            <f:selectItems value="#{commonOptions.regionOptions}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="Disability/Allergy:" style="float: right"/>
+                        <h:selectOneMenu value="#{schoolStaffController.institutionStaff.disabilityStatus}" styleClass="textarea">
+                            <f:selectItem itemLabel="NO" itemValue="N"/>
+                            <f:selectItem itemLabel="YES" itemValue="Y"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="Details:" style="float: right"/>
+                        <h:inputText value="#{schoolStaffController.institutionStaff.disabilityDetail}"/>
+                    </h:panelGrid>
+                </p:panel>
+
+                <p:panel style="margin-top: 10px">
+                    <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Contact Details</span></f:facet>
+                    <h:panelGrid columns="6" style="margin-left: -20px">
+                        <h:outputLabel value="Primary Contact:" style="float: right"/>
+                        <p:inputMask mask="9999999999"  value="#{schoolStaffController.institutionStaff.primaryContact}"/>
+                        <h:outputLabel value="Other Contact:" style="float: right"/>
+                        <p:inputMask mask="9999999999"  value="#{schoolStaffController.institutionStaff.otherContact}"/>
+                        <h:outputLabel value="Email Address:" style="float: right"/>
+                        <h:inputText  value="#{schoolStaffController.institutionStaff.emailAddress}"/>
+                        <h:outputLabel value="House Number:" style="float: right"/>
+                        <h:inputText  value="#{schoolStaffController.institutionStaff.houseNumber}"/>
+                        <h:outputLabel value="Land Mark:" style="float: right"/>
+                        <h:inputText  value="#{schoolStaffController.institutionStaff.physicalLocation}"/>
+                        <h:outputLabel value="Postal Address:" style="float: right"/>
+                        <h:inputText  value="#{schoolStaffController.institutionStaff.postalLocation}"/>
+                        <h:outputLabel value="Next of Kin:" style="float: right"/>
+                        <h:inputText  value="#{schoolStaffController.institutionStaff.nextOfKin}"/>                              
+                        <h:outputLabel value="Next of Kin Contact:" style="float: right"/>
+                        <p:inputMask mask="9999999999"  value="#{schoolStaffController.institutionStaff.kinContact}"/>
+                        <h:outputLabel value="Relation To Kin:" style="float: right"/>
+                        <h:selectOneMenu value="#{schoolStaffController.institutionStaff.relationToKin}" styleClass="textarea" >
+                            <f:selectItems value="#{commonOptions.kinRelationOptions}"/>
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                </p:panel>
+
+                <p:panel style="margin-top: 10px">
+                    <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Academic/Occupation Details</span></f:facet>
+                    <h:panelGrid columns="6" style="margin-left: -20px">
+                        <h:outputLabel value="Level of Education:" style="float: right"/>
+                        <h:selectOneMenu value="#{schoolStaffController.institutionStaff.levelOfEducation}" styleClass="textarea" >
+                            <f:selectItems value="#{commonOptions.levelOfEducationOptions}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="Last School Attended:" style="float: right"/>
+                        <h:inputText  value="#{schoolStaffController.institutionStaff.lastSchoolAttended}"/>
+                        <h:outputLabel value="Date of Appointment" style="float: right"/>
+                        <p:calendar showOn="button" navigator="true" size="12"
+                                    value="#{schoolStaffController.dateOfAdmission}"/>
+                        <h:outputLabel value="Staff Category:" style="float: right"/>
+                        <h:selectOneMenu styleClass="textarea" value="#{schoolStaffController.institutionStaff.staffCategory}">
+                            <f:selectItems value="#{commonOptions.staffCategoryOptions}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="Occupation Status:" style="float: right"/>
+                        <h:selectOneMenu id="academicLevel" styleClass="textarea" value="#{schoolStaffController.institutionStaff.occupationStatus}">
+                            <f:selectItem itemLabel="...Select One..." itemValue=""/>
+                            <f:selectItem itemLabel="SERVICE" itemValue="SERVICE"/>
+                            <f:selectItem itemLabel="PERMANENT" itemValue="PERMANENT"/>
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                </p:panel>
+
+                <center>
+                    <h:panelGrid columns="3" style="margin-top: 20px">
+                        <p:commandButton value="#{schoolStaffController.saveEditButtonText}" styleClass="buttons"
+                                         icon="ui-icon-disk" ajax="false"
+                                         action="#{schoolStaffController.saveEditButtonAction()}"/>
+                        <p:commandButton value="Clear" styleClass="buttons"
+                                         icon="ui-icon-cancel" ajax="false"
+                                         action="#{schoolStaffController.resetButtonAction()}"/>
+                        <p:commandButton icon="ui-icon-arrowthick-1-w" ajax="false"
+                                         value="Return"
+                                         action="#{schoolStaffController.returnToStaffListPanel()}"/>
+                    </h:panelGrid>
+                </center>
+            </p:panel>
+        </h:form>
+
+        <h:form rendered="#{schoolStaffController.renderStaffViewPanel}">
+            <p:panel style="overflow: auto">
+                <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">School Staff >> Staff Detail View</span></f:facet>
+
+                <p:panel>
+                    <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Personal Details</span></f:facet>
+                    <h:panelGrid columns="8" style="margin-left: -20px">
+                        <h:outputLabel value="Name:" style="float: right"/>
+                        <h:inputText value="#{schoolStaffController.staffName}"
+                                     styleClass="outputLable" readonly="true"/>
+                        <h:outputLabel value="Date of Birth:" style="float: right"/>
+                        <h:inputText value="#{schoolStaffController.institutionStaff.dateOfBirth}"
+                                     styleClass="outputLable" readonly="true">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:inputText>                              
+                        <h:outputLabel value="Marital Status:" style="float: right"/>
+                        <h:inputText value="#{schoolStaffController.maritalStatus}"
+                                     styleClass="outputLable" readonly="true"/>
+                        <h:outputLabel value="Nationality:" style="float: right"/>
+                        <h:inputText value="#{schoolStaffController.staffNationality}"
+                                     styleClass="outputLable" readonly="true"/>
+                        <h:outputLabel value="Hometown:" style="float: right"/>                                    
+                        <h:inputText  value="#{schoolStaffController.institutionStaff.hometown}"
+                                      styleClass="outputLable" readonly="true"/>
+                        <h:outputLabel value="Region:" style="float: right"/>
+                        <h:inputText value="#{schoolStaffController.hometownRegion}"
+                                     styleClass="outputLable" readonly="true"/>
+                        <h:outputLabel value="Disability/Allergy:" style="float: right"/>
+                        <h:inputText value="#{schoolStaffController.institutionStaff.disabilityStatus}"
+                                     styleClass="outputLable" readonly="true"/>
+                        <h:outputLabel value="Details:" style="float: right"/>
+                        <h:inputText value="#{schoolStaffController.institutionStaff.disabilityDetail}"
+                                     styleClass="outputLable" readonly="true"/>
+                    </h:panelGrid>
+                </p:panel>
+
+                <p:panel style="margin-top: 10px">
+                    <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Contact Details</span></f:facet>
+                    <h:panelGrid columns="6" style="margin-left: -20px">
+                        <h:outputLabel value="Primary Contact:" style="float: right"/>
+                        <h:inputText value="#{schoolStaffController.institutionStaff.primaryContact}"
+                                     styleClass="outputLable" readonly="true"/>
+                        <h:outputLabel value="Other Contact:" style="float: right"/>
+                        <h:inputText value="#{schoolStaffController.institutionStaff.otherContact}"
+                                     styleClass="outputLable" readonly="true"/>
+                        <h:outputLabel value="Email Address:" style="float: right"/>
+                        <h:inputText  value="#{schoolStaffController.institutionStaff.emailAddress}"
+                                      styleClass="outputLable" readonly="true"/>
+                        <h:outputLabel value="House Number:" style="float: right"/>
+                        <h:inputText  value="#{schoolStaffController.institutionStaff.houseNumber}"
+                                      styleClass="outputLable" readonly="true"/>
+                        <h:outputLabel value="Land Mark:" style="float: right"/>
+                        <h:inputText  value="#{schoolStaffController.institutionStaff.physicalLocation}"
+                                      styleClass="outputLable" readonly="true"/>
+                        <h:outputLabel value="Postal Address:" style="float: right"/>
+                        <h:inputText  value="#{schoolStaffController.institutionStaff.postalLocation}"
+                                      styleClass="outputLable" readonly="true"/>
+                        <h:outputLabel value="Next of Kin:" style="float: right"/>
+                        <h:inputText  value="#{schoolStaffController.institutionStaff.nextOfKin}"
+                                      styleClass="outputLable" readonly="true"/>                              
+                        <h:outputLabel value="Next of Kin Contact:" style="float: right"/>
+                        <h:inputText value="#{schoolStaffController.institutionStaff.kinContact}"
+                                     styleClass="outputLable" readonly="true"/>
+                        <h:outputLabel value="Relation To Kin:" style="float: right"/>
+                        <h:inputText value="#{schoolStaffController.nextofKinRelation}"
+                                     styleClass="outputLable" readonly="true"/>
+                    </h:panelGrid>
+                </p:panel>
+
+                <p:panel style="margin-top: 10px">
+                    <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Academic/Occupation Details</span></f:facet>
+                    <h:panelGrid columns="6" style="margin-left: -20px">
+                        <h:outputLabel value="Level of Education:" style="float: right"/>
+                        <h:inputText value="#{schoolStaffController.levelOfEducation}"
+                                     styleClass="outputLable" readonly="true"/>
+                        <h:outputLabel value="Last School Attended:" style="float: right"/>
+                        <h:inputText  value="#{schoolStaffController.institutionStaff.lastSchoolAttended}"
+                                      styleClass="outputLable" readonly="true"/>
+                        <h:outputLabel value="Date of Appointment:" style="float: right"/>
+                        <h:inputText value="#{schoolStaffController.institutionStaff.dateOfAppointment}"
+                                     styleClass="outputLable" readonly="true">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:inputText>
+                        <h:outputLabel value="Staff Category:" style="float: right"/>
+                        <h:inputText value="#{schoolStaffController.staffCategory}"
+                                     styleClass="outputLable" readonly="true"/>
+                        <h:outputLabel value="Occupation Status:" style="float: right"/>
+                        <h:inputText value="#{schoolStaffController.institutionStaff.occupationStatus}"
+                                     styleClass="outputLable" readonly="true"/>
+                    </h:panelGrid>
+                </p:panel>
+
+                <center>
+                    <h:panelGrid columns="3" style="margin-top: 30px">
+                        <p:commandButton value="Edit Record"
+                                         icon="ui-icon-pencil" ajax="false"
+                                         action="#{schoolStaffController.showStaffDetailEditPanel()}"/>
+                        <p:commandButton value="Delete"
+                                         icon="ui-icon-trash" ajax="false"
+                                         onclick="confirm('Are you sure you want to delete?')"/>
+                        <p:commandButton icon="ui-icon-arrowthick-1-w" ajax="false"
+                                         value="Return"
+                                         action="#{schoolStaffController.returnToStaffListPanel()}"/>
+                    </h:panelGrid>
+                </center>
+
+            </p:panel>
+        </h:form>
+
+    </h:body>
+</html>
+

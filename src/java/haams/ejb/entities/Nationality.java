@@ -16,29 +16,25 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author HDSL_MUMIN
+ * @author AbdulMumin
  */
 @Entity
-@Table(name = "nationality", catalog = "haams_edu", schema = "")
-@XmlRootElement
+@Table(name = "nationality")
 @NamedQueries({
-    @NamedQuery(name = "Nationality.findAll", query = "SELECT n FROM Nationality n"),
-    @NamedQuery(name = "Nationality.findByNationalityId", query = "SELECT n FROM Nationality n WHERE n.nationalityId = :nationalityId"),
-    @NamedQuery(name = "Nationality.findByNationalityDesc", query = "SELECT n FROM Nationality n WHERE n.nationalityDesc = :nationalityDesc")})
+    @NamedQuery(name = "Nationality.findAll", query = "SELECT n FROM Nationality n")})
 public class Nationality implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2)
-    @Column(name = "nationality_id", nullable = false, length = 2)
+    @Column(name = "nationality_id")
     private String nationalityId;
     @Size(max = 36)
-    @Column(name = "nationality_desc", length = 36)
+    @Column(name = "nationality_desc")
     private String nationalityDesc;
 
     public Nationality() {
@@ -86,7 +82,7 @@ public class Nationality implements Serializable {
 
     @Override
     public String toString() {
-        return "haams.ejb.entities.Nationality[ nationalityId=" + nationalityId + " ]";
+        return "haamsEdu.ejb.entities.Nationality[ nationalityId=" + nationalityId + " ]";
     }
     
 }

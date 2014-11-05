@@ -16,29 +16,25 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author HDSL_MUMIN
+ * @author AbdulMumin
  */
 @Entity
-@Table(name = "region", catalog = "haams_edu", schema = "")
-@XmlRootElement
+@Table(name = "region")
 @NamedQueries({
-    @NamedQuery(name = "Region.findAll", query = "SELECT r FROM Region r"),
-    @NamedQuery(name = "Region.findByRegionId", query = "SELECT r FROM Region r WHERE r.regionId = :regionId"),
-    @NamedQuery(name = "Region.findByRegionName", query = "SELECT r FROM Region r WHERE r.regionName = :regionName")})
+    @NamedQuery(name = "Region.findAll", query = "SELECT r FROM Region r")})
 public class Region implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 15)
-    @Column(name = "region_id", nullable = false, length = 15)
+    @Column(name = "region_id")
     private String regionId;
     @Size(max = 20)
-    @Column(name = "region_name", length = 20)
+    @Column(name = "region_name")
     private String regionName;
 
     public Region() {
@@ -86,7 +82,7 @@ public class Region implements Serializable {
 
     @Override
     public String toString() {
-        return "haams.ejb.entities.Region[ regionId=" + regionId + " ]";
+        return "haamsEdu.ejb.entities.Region[ regionId=" + regionId + " ]";
     }
     
 }

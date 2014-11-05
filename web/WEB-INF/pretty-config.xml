@@ -14,6 +14,11 @@
         <view-id>/haams/template.xhtml</view-id>
     </url-mapping>
     
+    <url-mapping id="student_entry">
+        <pattern value="/sysadmin/student_entry/new"></pattern>
+        <view-id>/haams/sysadmin/student_reg.xhtml</view-id>
+    </url-mapping>
+    
     <url-mapping id="module">
         <pattern value="/#{navHandler.module}/#{navHandler.page}"></pattern>
         <view-id>/haams/template.xhtml</view-id>
@@ -23,21 +28,5 @@
         <pattern value="/sysadmin/client_detail/edit"></pattern>
         <view-id>/hysen/sysadmin/client_detail_view.xhtml</view-id>
     </url-mapping>
-    
-    <url-mapping id="clientDetail">
-        <pattern value="/sysadmin/client_detail"></pattern>
-        <view-id>/hysen/sysadmin/client_detail.xhtml</view-id>
-    </url-mapping>
-    
-    <url-mapping id="companyServiceRequest">
-        <pattern value="/sysadmin/service_request"></pattern>
-        <view-id>/hysen/sysadmin/service_request.xhtml</view-id>
-    </url-mapping>
-    
-
-<!--    <url-mapping id="aa">
-        <pattern value="/aa/alhaji/seidu/#{navHandler.param}"></pattern>
-        <view-id>/hysen/sysadmin/welcome.xhtml</view-id>
-    </url-mapping>-->
     
 </pretty-config>

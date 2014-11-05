@@ -16,47 +16,37 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author HDSL_MUMIN
+ * @author AbdulMumin
  */
 @Entity
-@Table(name = "user_account", catalog = "haams_edu", schema = "")
-@XmlRootElement
+@Table(name = "user_account")
 @NamedQueries({
-    @NamedQuery(name = "UserAccount.findAll", query = "SELECT u FROM UserAccount u"),
-    @NamedQuery(name = "UserAccount.findByUserAccountId", query = "SELECT u FROM UserAccount u WHERE u.userAccountId = :userAccountId"),
-    @NamedQuery(name = "UserAccount.findByStaffId", query = "SELECT u FROM UserAccount u WHERE u.staffId = :staffId"),
-    @NamedQuery(name = "UserAccount.findByUsername", query = "SELECT u FROM UserAccount u WHERE u.username = :username"),
-    @NamedQuery(name = "UserAccount.findByUserPassword", query = "SELECT u FROM UserAccount u WHERE u.userPassword = :userPassword"),
-    @NamedQuery(name = "UserAccount.findByAccessRight", query = "SELECT u FROM UserAccount u WHERE u.accessRight = :accessRight"),
-    @NamedQuery(name = "UserAccount.findByAccountStatus", query = "SELECT u FROM UserAccount u WHERE u.accountStatus = :accountStatus"),
-    @NamedQuery(name = "UserAccount.findByUpdated", query = "SELECT u FROM UserAccount u WHERE u.updated = :updated"),
-    @NamedQuery(name = "UserAccount.findByDeleted", query = "SELECT u FROM UserAccount u WHERE u.deleted = :deleted")})
+    @NamedQuery(name = "UserAccount.findAll", query = "SELECT u FROM UserAccount u")})
 public class UserAccount implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 35)
-    @Column(name = "user_account_id", nullable = false, length = 35)
+    @Column(name = "user_account_id")
     private String userAccountId;
     @Size(max = 35)
-    @Column(name = "staff_id", length = 35)
+    @Column(name = "staff_id")
     private String staffId;
     @Size(max = 35)
-    @Column(name = "username", length = 35)
+    @Column(name = "username")
     private String username;
     @Size(max = 45)
-    @Column(name = "user_password", length = 45)
+    @Column(name = "user_password")
     private String userPassword;
     @Size(max = 2)
-    @Column(name = "access_right", length = 2)
+    @Column(name = "access_right")
     private String accessRight;
     @Column(name = "account_status")
-    private Character accountStatus;
+    private String accountStatus;
     @Column(name = "updated")
     private Character updated;
     @Column(name = "deleted")
@@ -85,6 +75,14 @@ public class UserAccount implements Serializable {
         this.staffId = staffId;
     }
 
+    public String getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(String accountStatus) {
+        this.accountStatus = accountStatus;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -107,14 +105,6 @@ public class UserAccount implements Serializable {
 
     public void setAccessRight(String accessRight) {
         this.accessRight = accessRight;
-    }
-
-    public Character getAccountStatus() {
-        return accountStatus;
-    }
-
-    public void setAccountStatus(Character accountStatus) {
-        this.accountStatus = accountStatus;
     }
 
     public Character getUpdated() {
@@ -155,7 +145,7 @@ public class UserAccount implements Serializable {
 
     @Override
     public String toString() {
-        return "haams.ejb.entities.UserAccount[ userAccountId=" + userAccountId + " ]";
+        return "haamsEdu.ejb.entities.UserAccount[ userAccountId=" + userAccountId + " ]";
     }
     
 }

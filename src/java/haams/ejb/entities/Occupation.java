@@ -16,29 +16,25 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author HDSL_MUMIN
+ * @author AbdulMumin
  */
 @Entity
-@Table(name = "occupation", catalog = "haams_edu", schema = "")
-@XmlRootElement
+@Table(name = "occupation")
 @NamedQueries({
-    @NamedQuery(name = "Occupation.findAll", query = "SELECT o FROM Occupation o"),
-    @NamedQuery(name = "Occupation.findByOccupationId", query = "SELECT o FROM Occupation o WHERE o.occupationId = :occupationId"),
-    @NamedQuery(name = "Occupation.findByOccupationDesc", query = "SELECT o FROM Occupation o WHERE o.occupationDesc = :occupationDesc")})
+    @NamedQuery(name = "Occupation.findAll", query = "SELECT o FROM Occupation o")})
 public class Occupation implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 15)
-    @Column(name = "occupation_id", nullable = false, length = 15)
+    @Column(name = "occupation_id")
     private String occupationId;
     @Size(max = 30)
-    @Column(name = "occupation_desc", length = 30)
+    @Column(name = "occupation_desc")
     private String occupationDesc;
 
     public Occupation() {
@@ -86,7 +82,7 @@ public class Occupation implements Serializable {
 
     @Override
     public String toString() {
-        return "haams.ejb.entities.Occupation[ occupationId=" + occupationId + " ]";
+        return "haamsEdu.ejb.entities.Occupation[ occupationId=" + occupationId + " ]";
     }
     
 }

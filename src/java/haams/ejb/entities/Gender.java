@@ -16,43 +16,38 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author HDSL_MUMIN
+ * @author AbdulMumin
  */
 @Entity
-@Table(name = "gender", catalog = "haams_edu", schema = "")
-@XmlRootElement
+@Table(name = "gender")
 @NamedQueries({
-    @NamedQuery(name = "Gender.findAll", query = "SELECT g FROM Gender g"),
-    @NamedQuery(name = "Gender.findByGenderId", query = "SELECT g FROM Gender g WHERE g.genderId = :genderId"),
-    @NamedQuery(name = "Gender.findByGenderDesc", query = "SELECT g FROM Gender g WHERE g.genderDesc = :genderDesc")})
+    @NamedQuery(name = "Gender.findAll", query = "SELECT g FROM Gender g")})
 public class Gender implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 1)
-    @Column(name = "gender_id", nullable = false, length = 1)
-    private String genderId;
+    @Column(name = "gender_id")
+    private Character genderId;
     @Size(max = 35)
-    @Column(name = "gender_desc", length = 35)
+    @Column(name = "gender_desc")
     private String genderDesc;
 
     public Gender() {
     }
 
-    public Gender(String genderId) {
+    public Gender(Character genderId) {
         this.genderId = genderId;
     }
 
-    public String getGenderId() {
+    public Character getGenderId() {
         return genderId;
     }
 
-    public void setGenderId(String genderId) {
+    public void setGenderId(Character genderId) {
         this.genderId = genderId;
     }
 
@@ -86,7 +81,7 @@ public class Gender implements Serializable {
 
     @Override
     public String toString() {
-        return "haams.ejb.entities.Gender[ genderId=" + genderId + " ]";
+        return "haamsEdu.ejb.entities.Gender[ genderId=" + genderId + " ]";
     }
     
 }

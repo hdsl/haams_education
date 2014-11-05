@@ -1,7 +1,10 @@
 package haams.ejb.services;
 
+import haams.ejb.entities.ClassMembership;
 import haams.ejb.entities.GeneratePk;
+import haams.ejb.entities.InstitutionClass;
 import haams.ejb.entities.UserAccount;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -18,28 +21,10 @@ public class CustomCrudService {
     @PersistenceContext
     private EntityManager em;
 
-    public List findByParameter(Class t, String parameterQuery, String productTypeId, Character includeLogicallyDelete) {
+    public List findByParameter(Class t, String parameterQuery, String searchText, Character includeLogicallyDelete) {
 
         String qry = "SELECT t FROM " + t.getSimpleName() + " t "
-                + "WHERE t." + parameterQuery + " LIKE '%" + productTypeId + "%' "
-                + "AND t.deleted='" + includeLogicallyDelete + "' ";
-
-        try {
-
-            return em.createQuery(qry).getResultList();
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-            return Collections.EMPTY_LIST;
-
-        }
-    }
-    
-    public List searchByParameter(Class t, String parameterQuery, String productTypeId, Character includeLogicallyDelete) {
-
-        String qry = "SELECT t FROM " + t.getSimpleName() + " t "
-                + "WHERE t." + parameterQuery +"="+ productTypeId+ " "
+                + "WHERE t." + parameterQuery + " LIKE '%" + searchText + "%' "
                 + "AND t.deleted='" + includeLogicallyDelete + "' ";
 
         try {
@@ -54,6 +39,40 @@ public class CustomCrudService {
         }
     }
 
+    public <T> T find(Class t, String parameterQuery, String searchText) {
+
+        String qry = "SELECT t FROM " + t.getSimpleName() + " t "
+                + "WHERE t." + parameterQuery + " LIKE '%" + searchText + "%' ";
+
+        try {
+
+            return (T) em.createQuery(qry).getSingleResult();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            return null;
+
+        }
+    }
+
+//    public List searchByParameter(Class t, String parameterQuery, String productTypeId, Character includeLogicallyDelete) {
+//
+//        String qry = "SELECT t FROM " + t.getSimpleName() + " t "
+//                + "WHERE t." + parameterQuery +"="+ productTypeId+ " "
+//                + "AND t.deleted='" + includeLogicallyDelete + "' ";
+//
+//        try {
+//
+//            return em.createQuery(qry).getResultList();
+//
+//        } catch (Exception e) {
+//
+//            e.printStackTrace();
+//            return Collections.EMPTY_LIST;
+//
+//        }
+//    }
     public List findByParameter(Class t, String searchAttribute1, String searcText1, String searchAttribute2, String searcText2, Character includeLogicallyDelete) {
 
         String qry = "SELECT t FROM " + t.getSimpleName() + " t "
@@ -91,7 +110,6 @@ public class CustomCrudService {
 //            return Collections.EMPTY_LIST;
 //        }
 //    }
-
 //    public ClientContact clientContactSave(ClientContact cc) {
 //
 //        try {
@@ -107,7 +125,6 @@ public class CustomCrudService {
 //        }
 //        return null;
 //    }
-
 //    public List<ServiceRequest> clientPMServiceList(String clientId, String searchAttribute) {
 //
 //        List<ServiceRequest> serviceRequestList;
@@ -140,7 +157,6 @@ public class CustomCrudService {
 //        }
 //
 //    }
-
 //    public List<ServiceRequest> clientServiceRequestList(Date startDate, Date endDate, String clientId) {
 //
 //        List<ServiceRequest> serviceRequestList;
@@ -161,7 +177,6 @@ public class CustomCrudService {
 //        }
 //
 //    }
-
 //    public List<ServiceRequest> clientServiceModelRequestList(Date startDate, Date endDate, String serialNumber) {
 //
 //        List<ServiceRequest> serviceRequestList;
@@ -202,7 +217,6 @@ public class CustomCrudService {
 //        }
 //
 //    }
-
 //    public ServiceRequest clientPMScheduleList(String pmPeriod, int pmYear, String serialNumber) {
 //
 //        String qry = "SELECT t FROM ServiceRequest t WHERE t.clientProduct.commonId = '" + serialNumber + "' "
@@ -219,7 +233,6 @@ public class CustomCrudService {
 //        }
 //
 //    }
-
     public UserAccount getUserAccount(String username, String password) {
 
         String qry = "SELECT t FROM UserAccount t WHERE t.username = '" + username + "' AND t.userPassword = '" + password + "' "
@@ -235,6 +248,41 @@ public class CustomCrudService {
             return null;
 
         }
+    }
+    
+    public List<ClassMembership> classMembershipStudent(String studentId, String academicYear) {
+
+        String qryString = "";
+
+        try {
+
+            qryString = "SELECT e FROM ClassMembership e WHERE e.student.commonId = '" + studentId + "' "
+                    + " AND e.academicYear='" + academicYear + "' AND e.deleted = 'N' ";
+
+            return em.createQuery(qryString).getResultList();
+
+        } catch (Exception e) {
+//            e.printStackTrace();
+            return null;
+        }
+    }
+    
+     public List<InstitutionClass> getInstitutionClass(String academicLevel, String schoolProgramme) {
+        List<InstitutionClass> listOfInstitutionClass = null;
+
+        String qryString = "";
+
+        try {
+            qryString = "SELECT e FROM InstitutionClass e WHERE e.academicLevel.academicLevelId = '" + academicLevel + "'"
+                    + "AND e.institutionProgram.commonId='" + schoolProgramme + "'  AND e.deleted = 'N'";
+
+            listOfInstitutionClass = (List<InstitutionClass>) em.createQuery(qryString).getResultList();
+
+            return listOfInstitutionClass;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
     }
 
     // <editor-fold defaultstate="collapsed" desc=" GeneratePk Persistence Functionalities">

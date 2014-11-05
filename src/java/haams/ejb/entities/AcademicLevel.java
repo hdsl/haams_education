@@ -16,29 +16,25 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author HDSL_MUMIN
+ * @author AbdulMumin
  */
 @Entity
-@Table(name = "academic_level", catalog = "haams_edu", schema = "")
-@XmlRootElement
+@Table(name = "academic_level")
 @NamedQueries({
-    @NamedQuery(name = "AcademicLevel.findAll", query = "SELECT a FROM AcademicLevel a"),
-    @NamedQuery(name = "AcademicLevel.findByAcademicLevelId", query = "SELECT a FROM AcademicLevel a WHERE a.academicLevelId = :academicLevelId"),
-    @NamedQuery(name = "AcademicLevel.findByAcademicLevelName", query = "SELECT a FROM AcademicLevel a WHERE a.academicLevelName = :academicLevelName")})
+    @NamedQuery(name = "AcademicLevel.findAll", query = "SELECT a FROM AcademicLevel a")})
 public class AcademicLevel implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "academic_level_id", nullable = false, length = 20)
+    @Column(name = "academic_level_id")
     private String academicLevelId;
     @Size(max = 45)
-    @Column(name = "academic_level_name", length = 45)
+    @Column(name = "academic_level_name")
     private String academicLevelName;
 
     public AcademicLevel() {
@@ -86,7 +82,7 @@ public class AcademicLevel implements Serializable {
 
     @Override
     public String toString() {
-        return "haams.ejb.entities.AcademicLevel[ academicLevelId=" + academicLevelId + " ]";
+        return "haamsEdu.ejb.entities.AcademicLevel[ academicLevelId=" + academicLevelId + " ]";
     }
     
 }

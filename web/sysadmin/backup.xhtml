@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+       <h:form id="stdDataViewForm" rendered="#{studentController.renderStudentDataViewPanel}">
+            <p:panel style="overflow: auto">
+                <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Student Detailed Information</span></f:facet>
+
+                <div class="lessee_info_div">
+                    <p:panel>
+                        <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Personal Details</span></f:facet>
+                        <h:panelGrid columns="6" style="margin-left: -20px">
+                            <h:outputLabel value="Name:"  style="font-weight: bolder;float: right"/>
+                            <h:inputText value="#{studentController.studentName}" readonly="true"
+                                         styleClass="outputLable"/>
+                            <h:outputLabel value="Gender:"  style="font-weight: bolder;float: right"/>
+                            <h:inputText value="#{studentController.student.gender}" readonly="true"
+                                         styleClass="outputLable"/>
+                            <h:outputLabel value="Date of Birth:"  style="font-weight: bolder;float: right"/>
+                            <h:inputText styleClass="outputLable" 
+                                         value="#{studentController.student.dateOfbirth}" readonly="true" >
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:inputText>
+                            <h:outputLabel value="Nationality:"  style="font-weight: bolder;float: right"/>
+                            <h:inputText value="#{studentController.student.nationality.nationalityDesc}" readonly="true"
+                                         styleClass="outputLable"/>
+                            <h:outputLabel value="Hometown:"  style="font-weight: bolder;float: right"/>                                    
+                            <h:inputText  value="#{studentController.student.hometown}" readonly="true"
+                                          styleClass="outputLable"/>
+                            <h:outputLabel value="Region of Origin:"  style="font-weight: bolder;float: right"/>
+                            <h:inputText value="#{studentController.student.region.regionName}" readonly="true"
+                                         styleClass="outputLable"/>
+                            <h:outputLabel value="Disability/Allergy:"  style="font-weight: bolder;float: right"/>
+                            <h:inputText value="#{studentController.student.disabilitiesStatus}" readonly="true"
+                                         styleClass="outputLable"/>
+                            <h:outputLabel value="Details:"  style="font-weight: bolder;float: right"/>
+                            <h:inputTextarea value="#{studentController.student.disabilitiesDetail}" readonly="true"
+                                             styleClass="outputLable"/>
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <p:panel style="margin-top: 10px">
+                        <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Guardian Details</span></f:facet>
+                        <h:panelGrid columns="6" style="margin-left: -20px">
+                            <h:outputLabel value="Name:"  style="font-weight: bolder;float: right"/>
+                            <h:inputText  value="#{studentController.student.guardianName}"
+                                          styleClass="outputLable"/>
+                            <h:outputLabel value="Primary Contact:"  style="font-weight: bolder;float: right"/>
+                            <h:inputText value="#{studentController.student.guardianContactNumber}" readonly="true"
+                                         styleClass="outputLable"/>
+                            <h:outputLabel value="Land Mark:"  style="font-weight: bolder;float: right"/>
+                            <h:inputTextarea  value="#{studentController.student.guardianPhysicalAddress}" readonly="true"
+                                              styleClass="outputLable"/>
+                            <h:outputLabel value="Postal Address:"  style="font-weight: bolder;float: right"/>
+                            <h:inputTextarea  value="#{studentController.student.guardianPostalAddress}" readonly="true"
+                                              styleClass="outputLable"/>
+                            <h:outputLabel value="Occupation:"  style="font-weight: bolder;float: right"/>
+                            <h:inputText value="#{studentController.student.guardianOccupation.occupationDesc}" readonly="true"
+                                         styleClass="outputLable"/>
+                            <h:outputLabel value="Relation To Student:"  style="font-weight: bolder;float: right"/>
+                            <h:inputText value="#{studentController.student.relationToGuardian.relationDesc}" readonly="true"
+                                         styleClass="outputLable"/>
+                        </h:panelGrid>
+                    </p:panel>
+
+
+                    <p:panel style="margin-top: 10px">
+                        <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Admission Details</span></f:facet>
+                        <h:panelGrid columns="6" style="margin-left: -20px">
+                            <h:outputLabel value="Date of Admission"  style="font-weight: bolder;float: right"/>
+                            <h:inputText value="#{studentController.student.dateOfAdmission}" styleClass="outputLable">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:inputText>
+                            <h:outputLabel value="Course:"  style="font-weight: bolder;float: right"/>
+                            <h:inputText value="#{studentController.student.assignedProgramme.programName}" readonly="true"
+                                         styleClass="outputLable"/>
+                            <h:outputLabel value="Academic Level:"  style="font-weight: bolder;float: right"/>
+                            <h:inputText value="#{studentController.student.academicLevel.academicLevelId}" readonly="true"
+                                         styleClass="outputLable"/>
+                            <h:outputLabel value="Class:"  style="font-weight: bolder;float: right"/>
+                            <h:inputText value="#{studentController.student.assignedClass.className}" readonly="true"
+                                         styleClass="outputLable"/>
+                            <h:outputLabel value="House of Affiliation:"  style="font-weight: bolder;float: right"/>
+                            <h:inputText value="#{studentController.student.residenceOfAffiliation.houseName}" readonly="true"
+                                         styleClass="outputLable"/>
+                            <h:outputLabel value="Residence Status:"  style="font-weight: bolder;float: right"/>
+                            <h:inputText value="#{studentController.student.residenceStatus.residenceStatusDesc}" readonly="true"
+                                         styleClass="outputLable"/>
+                            <h:outputLabel value="Current Status:"  style="font-weight: bolder;float: right"/>
+                            <h:inputText value="#{studentController.student.studentAcademicStatus.studentAcademicStatusDesc}" 
+                                         styleClass="outputLable" readonly="true"/>
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <center>
+                        <h:panelGrid columns="3" style="margin-top: 30px">
+                            <p:commandButton value="#{studentController.saveEditButtonText}"
+                                             icon="ui-icon-pencil" ajax="false"
+                                             action="#{studentController.renderStudentDataEditPanel()}"/>
+                            <p:commandButton value="Delete"
+                                             icon="ui-icon-trash" ajax="false"
+                                             onclick="confirm('Are you sure you want to delete?')"/>
+                            <p:commandButton icon="ui-icon-arrowthick-1-w" ajax="false"
+                                             value="Return"
+                                             update=":studentListForm"
+                                             action="#{studentController.returnToStudentDataViewPanel()}"/>
+                        </h:panelGrid>
+                    </center>
+                </div>
+                <div class="lessee_pix_div">
+                    <p:panel>
+
+                        <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Picture</span></f:facet>
+
+                        <h:panelGrid columns="1">
+                            <img height="120px;" width="120px;" src="#{studentController.studentPix}"
+                                 style="display: block; border: solid #f9dd34 1px;" id="stdPix"/> 
+
+                        </h:panelGrid>
+
+                    </p:panel>
+
+                </div>
+            </p:panel>
+
+        </h:form>
+    </h:body>
+</html>
+

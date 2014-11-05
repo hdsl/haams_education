@@ -16,29 +16,25 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author HDSL_MUMIN
+ * @author AbdulMumin
  */
 @Entity
-@Table(name = "kin_relation", catalog = "haams_edu", schema = "")
-@XmlRootElement
+@Table(name = "kin_relation")
 @NamedQueries({
-    @NamedQuery(name = "KinRelation.findAll", query = "SELECT k FROM KinRelation k"),
-    @NamedQuery(name = "KinRelation.findByKinRelationId", query = "SELECT k FROM KinRelation k WHERE k.kinRelationId = :kinRelationId"),
-    @NamedQuery(name = "KinRelation.findByRelationDesc", query = "SELECT k FROM KinRelation k WHERE k.relationDesc = :relationDesc")})
+    @NamedQuery(name = "KinRelation.findAll", query = "SELECT k FROM KinRelation k")})
 public class KinRelation implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2)
-    @Column(name = "kin_relation_id", nullable = false, length = 2)
+    @Column(name = "kin_relation_id")
     private String kinRelationId;
     @Size(max = 35)
-    @Column(name = "relation_desc", length = 35)
+    @Column(name = "relation_desc")
     private String relationDesc;
 
     public KinRelation() {
@@ -86,7 +82,7 @@ public class KinRelation implements Serializable {
 
     @Override
     public String toString() {
-        return "haams.ejb.entities.KinRelation[ kinRelationId=" + kinRelationId + " ]";
+        return "haamsEdu.ejb.entities.KinRelation[ kinRelationId=" + kinRelationId + " ]";
     }
     
 }
