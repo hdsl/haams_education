@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="house_membership" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="82b20af5-4ccc-477b-9215-2c0f86c5629b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="reportTitle" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="houseOfResidence" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="houseMaster" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="inmatesGender" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="academicYear" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="companyLogo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="companyName" class="java.lang.String"/>
+	<parameter name="companyTelephone" class="java.lang.String"/>
+	<parameter name="footerText" class="java.lang.String"/>
+	<parameter name="companyAddress" class="java.lang.String"/>
+	<parameter name="academicLevel" class="java.lang.String"/>
+	<parameter name="residentType" class="java.lang.String"/>
+	<field name="studentName" class="java.lang.String"/>
+	<field name="studentId" class="java.lang.String"/>
+	<field name="studentClass" class="java.lang.String"/>
+	<field name="studentCourse" class="java.lang.String"/>
+	<field name="residenceStatus" class="java.lang.String"/>
+	<variable name="todayDate" class="java.util.Date">
+		<variableExpression><![CDATA[new java.util.Date()]]></variableExpression>
+	</variable>
+	<variable name="counter" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{studentId}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="81" splitType="Stretch">
+			<line>
+				<reportElement uuid="b7ebc3a7-3bca-47b2-98d4-0822967bd070" x="1" y="79" width="534" height="2"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="fe6be4cb-2bca-477a-ae20-863c74062851" x="2" y="78" width="533" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b693f51f-c27b-4051-a8ea-059259070be8" x="103" y="23" width="333" height="24" forecolor="#660000"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="8605f950-dd0d-4685-8554-bddcad3074e7" x="102" y="47" width="303" height="18" forecolor="#660000"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyAddress}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b9a2d08f-7781-4960-96b0-ef7e13a6f3fb" x="103" y="64" width="302" height="13" forecolor="#003366"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyTelephone}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="7718f5e2-8a55-4ab3-818e-354c79c2c781" x="1" y="23" width="102" height="53"/>
+				<imageExpression><![CDATA[$P{companyLogo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="82" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement uuid="691690f2-9369-4cfd-a993-ce430047e2bc" key="textField" mode="Opaque" x="0" y="2" width="535" height="21" forecolor="#FFFFFF" backcolor="#999999"/>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Double" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{reportTitle}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="0f200b66-28e9-483a-9129-0989b3a89457" key="textField" x="360" y="29" width="167" height="13"/>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{houseMaster}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="d4c3551a-e3f0-4695-9a5b-80771f4f60db" key="textField" x="66" y="29" width="162" height="15"/>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{houseOfResidence}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="d91b8480-4943-4e22-b76f-5c019dcdf3d9" key="staticText-3" x="7" y="29" width="55" height="15"/>
+				<textElement>
+					<font fontName="Book Antiqua" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[House:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="df140c80-aa10-40ff-acab-fbdfcc655820" key="staticText-5" x="239" y="29" width="121" height="13"/>
+				<textElement>
+					<font fontName="Book Antiqua" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[House Master/Mistress:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="98897a0d-d644-44bd-b997-f87b39ac1bd4" key="textField-1" x="361" y="48" width="167" height="13"/>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{academicYear}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="afe59a53-8e94-4ae1-9577-4d3719ab559f" key="textField-2" x="67" y="48" width="162" height="13"/>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{inmatesGender}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="312d96b7-80ac-4327-993d-8b297d5965d8" key="staticText-15" x="240" y="48" width="121" height="13"/>
+				<textElement>
+					<font fontName="Book Antiqua" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Academic Year:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f9d67112-a156-488b-8cfb-02d9cc5dc635" key="staticText-16" x="8" y="48" width="55" height="13"/>
+				<textElement>
+					<font fontName="Book Antiqua" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Gender:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="312d96b7-80ac-4327-993d-8b297d5965d8" key="staticText-15" x="241" y="64" width="121" height="13"/>
+				<textElement>
+					<font fontName="Book Antiqua" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Academic Level:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="98897a0d-d644-44bd-b997-f87b39ac1bd4" key="textField-1" x="362" y="64" width="167" height="13"/>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{academicLevel}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="98897a0d-d644-44bd-b997-f87b39ac1bd4" key="textField-1" x="86" y="64" width="150" height="13"/>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{residentType}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="312d96b7-80ac-4327-993d-8b297d5965d8" key="staticText-15" x="7" y="64" width="72" height="13"/>
+				<textElement>
+					<font fontName="Book Antiqua" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Resident Type:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="c8850585-c05e-4357-8666-0c15a487ad12" key="staticText-7" mode="Opaque" x="22" y="0" width="57" height="32" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Student Id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d17d46c2-6063-4c85-9322-20a95a8dd33c" key="staticText-8" mode="Opaque" x="0" y="0" width="23" height="32" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8f356445-0194-490a-9d8a-fa048160e930" key="staticText-7" mode="Opaque" x="479" y="0" width="57" height="32" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Signature]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1f4845a0-4efc-4484-bdb3-0bfed7eea58f" key="staticText-7" mode="Opaque" x="245" y="0" width="90" height="32" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle" rotation="None">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Course]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9e8c66b5-e263-4700-beb9-cce080d1184a" key="staticText-7" mode="Opaque" x="79" y="0" width="166" height="32" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Student Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ba7f9bea-5c97-4e19-9988-dbf7001ac5f2" key="staticText-7" mode="Opaque" x="335" y="0" width="38" height="32" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Class]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="03df52b8-4327-44c8-95b1-62c5ab38609d" key="staticText-7" mode="Opaque" x="372" y="0" width="107" height="32" forecolor="#FFFFFF" backcolor="#000000"/>
+				<box leftPadding="4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[Resident Type]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="d2394ad3-f19d-48a2-9347-6f352227e5f4" key="textField" x="1" y="0" width="21" height="15"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Book Antiqua" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{counter}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="2b5e4bc4-502f-478b-9a36-0ea3cfbea19a" key="textField" x="22" y="0" width="57" height="15"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+					<font fontName="Book Antiqua" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{studentId}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f0d6d7cb-6503-4586-8979-d62f1314fd01" key="staticText" x="479" y="0" width="55" height="15"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9c8333d8-9bf4-4f27-a825-1d0b868f34bd" key="textField" x="79" y="0" width="166" height="15"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Book Antiqua" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{studentName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="2d83e89d-92fd-4319-bb19-b1b439ad042d" key="textField" x="245" y="0" width="89" height="15"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Book Antiqua" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{studentCourse}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b92b924f-3dc2-4ba0-ac16-b54ab9b6567b" key="textField" x="334" y="0" width="38" height="15"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Book Antiqua" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{studentClass}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="fb68ffd1-5aea-426f-a68b-c010658de23d" key="textField" x="372" y="0" width="107" height="15"/>
+				<box leftPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Book Antiqua" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{residenceStatus}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="14" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="93725abf-d902-4ca8-b7c9-957d33815498" key="rectangle-3" x="0" y="0" width="535" height="14" backcolor="#666666"/>
+			</rectangle>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="71c28475-42ee-47d2-9105-bc3b82a45d02" key="textField" x="428" y="0" width="100" height="14" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{todayDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e7d69859-649c-479b-913a-adc57451f8d6" x="2" y="1" width="321" height="13" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{footerText}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

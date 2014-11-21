@@ -99,7 +99,8 @@ public class StudentController implements Serializable {
 
     ;
 //</editor-fold>
-//    //<editor-fold defaultstate="collapsed" desc="Methods">
+    
+    //    //<editor-fold defaultstate="collapsed" desc="Methods">
     public StudentController() {
 
     }
@@ -172,9 +173,6 @@ public class StudentController implements Serializable {
 
     public void studentPixUpload(FileUploadEvent event) {
 
-        System.out.println("In here.....................");
-
-        System.out.println("Client Pix Path....................." + clientFullImagePath);
         UploadedFile uploadedFile = event.getFile();
 
         Integer id = crudService.generatePk("student_pix_id");
@@ -495,11 +493,28 @@ public class StudentController implements Serializable {
         renderNewStudentEntryPanel = true;
 
         student = new Student();
+        
+        studentPix = "";
+        studentPixId = "";         
+        
+        surname = "";
+        othername = "";
+        dateOfbirth = null;
+        dateOfAdmission = null;
+        assignedProgramme = "";
+        academicLevel = "";
+        assignedClass = "";
+        nationality = "";
+        region = "";
+        guardianOccupation = "";
+        relationToGuardian = "";
+
+        saveEditButtonText = "Save";
 
     }
     //</editor-fold>
 
-//    //<editor-fold defaultstate="collapsed" desc="Getters and Setters">
+    //    //<editor-fold defaultstate="collapsed" desc="Getters and Setters">
     public Student getStudent() {
         return student;
     }

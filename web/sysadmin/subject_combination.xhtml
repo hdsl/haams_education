@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+    </h:head>
+    <h:body>
+        <p:messages/>
+        <p:panel style="overflow: auto">
+            <f:facet name="header"><span style="font-weight: bolder;font-variant: small-caps">Subject Combination</span></f:facet>
+
+            <div style="  width: 46%;float: left;z-index: 1000;background-color: #EEEEEE;">
+                <h:form id="subjectCombineEntryForm">
+                    <h:panelGrid columns="4" style="margin-top: 10px">
+                        <h:outputLabel value="Course:" style="float: right"/>
+                        <h:selectOneMenu  value="#{subjectCombinationController.courseCode}">
+                            <f:selectItem itemLabel="...Select One..." itemValue=""/>
+                            <f:selectItems value="#{commonOptions.academicCoursesOptions}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="Comb. Name:" style="float: right"/>
+                        <h:inputTextarea value="#{subjectCombinationController.subjectGroup.subjectGroupName}"/>
+                        <h:outputLabel value="Short Name:" style="float: right"/>
+                        <h:inputText value="#{subjectCombinationController.subjectGroup.groupName}"/>
+                        <h:outputLabel value="Status:" style="float: right"/>
+                        <h:selectOneMenu value="#{subjectCombinationController.subjectGroup.groupStatus}">
+                            <f:selectItem itemLabel="...Select One..." itemValue=""/>
+                            <f:selectItem itemLabel="ACTIVE" itemValue="ACTIVE"/>
+                            <f:selectItem itemLabel="INACTIVE" itemValue="INACTIVE"/>
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                    <h:panelGrid style="margin-top: 20px">
+                        <h:outputLabel value="Select Subjects:"/>
+                        <p:pickList var="subject" value="#{subjectCombinationController.academicSubjects}" 
+                                    itemLabel="#{subject}"  
+                                    itemValue="#{subject}" /> 
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="4" style="margin-top: 20px">
+                        <p:commandButton value="#{subjectCombinationController.saveEditButtonText}" 
+                                         icon="ui-icon-disk" ajax="false"
+                                         action="#{subjectCombinationController.saveEditButtonAction()}"/>
+                        <p:commandButton value="Clear" icon="ui-icon-cancel" ajax="false"
+                                         action="#{subjectCombinationController.resetButtonAction()}"/>
+                    </h:panelGrid>
+
+                </h:form>
+            </div>
+
+            <div style=" float:right;position:relative;width:53%; overflow: auto;margin-left: 10px;">
+                <h:form id="subjectCombineListForm">
+                    <p:dataTable paginator="true" rows="10" var="subjectGroup" style="margin-top: 0px"
+                                 value="#{subjectCombinationView.subjectGroupList}"
+                                 rowKey="#{subjectGroup.commonId}"  
+                                 selection="#{subjectCombinationController.subjectGroup}"
+                                 selectionMode="single"
+                                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">  
+
+                        <p:column>
+                            <f:facet name="header">Course</f:facet>
+                            <h:outputText value="#{subjectGroup.institutionProgram.programName}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Subject Combination Name</f:facet>
+                            <h:outputText value="#{subjectGroup.subjectGroupName}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Short Name</f:facet>
+                            <h:outputText value="#{subjectGroup.groupName}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header"></f:facet>
+                            <p:commandLink value="Edit" style="text-decoration: none;color:blue"
+                                           action="#{subjectCombinationController.rowSelectDataAction(subjectGroup)}"
+                                           update=":subjectCombineEntryForm" ajax="false"/>
+                            <p:commandLink value="Delete" style="text-decoration: none;color: red;margin-left: 20px"
+                                           action="#{subjectCombinationController.deleteButtonAction(subjectGroup)}"
+                                           onclick="confirm('Are you sure you want to delete?')"
+                                           update=":subjectCombineListForm" ajax="false"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </div>
+        </p:panel>
+    </h:body>
+
+</html>
+

@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:body>
+        <p:messages/>
+        <p:panel>
+            <f:facet name="header"><span style="font-weight: bolder;font-variant: small-caps">Class Rooms</span></f:facet>
+            
+            <h:form>
+                <h:panelGrid columns="4" style="margin-top: 10px">
+                    <h:outputLabel value="Class Name:"/>
+                    <h:inputText value="#{classRoomController.classId}"/>
+                    <h:outputLabel value="Academic Course:"/>
+                    <h:selectOneMenu  value="#{classRoomController.courseCode}">
+                        <f:selectItem itemLabel="...Select One..." itemValue=""/>
+                        <f:selectItems value="#{commonOptions.academicCoursesOptions}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="Academic Level:"/>
+                    <h:selectOneMenu  value="#{classRoomController.institutionClass.academicLevel.academicLevelId}">
+                        <f:selectItem itemLabel="...Select One..." itemValue=""/>
+                        <f:selectItems value="#{commonOptions.academicLevelOptions}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+
+                <h:panelGrid columns="4" style="margin-top: 20px">
+                    <p:commandButton value="#{classRoomController.saveEditButtonText}" 
+                                     icon="ui-icon-disk" ajax="false"
+                                     action="#{classRoomController.saveEditButtonAction()}"/>
+                    <p:commandButton value="Clear" icon="ui-icon-cancel" ajax="false"
+                                     action="#{classRoomController.resetButtonAction()}"/>
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
+
+        <h:form>
+            <p:dataTable paginator="true" rows="10" var="class" style="margin-top: 0px"
+                         value="#{classRoomView.institutionClassList}"
+                         rowKey="#{class.commonId}"  
+                         selection="#{classRoomController.institutionClass}"
+                         selectionMode="single"
+                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">     
+                  
+                <p:column>
+                    <f:facet name="header">Class</f:facet>
+                    <h:outputText value="#{class.className}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">Course</f:facet>
+                    <h:outputText value="#{class.institutionProgram.programName}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">Academic Level</f:facet>
+                    <h:outputText value="#{class.academicLevel.academicLevelId}"/>
+                </p:column>
+               <p:column>
+                        <f:facet name="header"></f:facet>
+                        <p:commandLink value="Edit" style="text-decoration: none;color:blue"
+                                       action="#{classRoomController.rowSelectDataAction(class)}"
+                                       ajax="false"/>
+                        <p:commandLink value="Delete" style="text-decoration: none;color: red;margin-left: 20px"
+                                       action="#{classRoomController.deleteButtonAction(class)}"
+                                       onclick="confirm('Are you sure you want to delete?')"
+                                       ajax="false"/>
+                    </p:column>
+            </p:dataTable>
+        </h:form>
+    </h:body>
+
+</html>
+

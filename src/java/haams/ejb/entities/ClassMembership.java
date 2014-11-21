@@ -1,9 +1,9 @@
 
 package haams.ejb.entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -18,8 +18,9 @@ import javax.persistence.Table;
     @NamedQuery(name = "ClassMembership.findAll", query = "SELECT c FROM ClassMembership c")})
 public class ClassMembership extends CommonEntity {
    
-    @Column(name = "academic_year")
-    private String academicYear;
+    @JoinColumn(name = "academic_year")
+    @ManyToOne
+    private AcademicYear academicYear;
     
     @JoinColumn(name = "student_id")
     private Student student;
@@ -33,14 +34,14 @@ public class ClassMembership extends CommonEntity {
     public ClassMembership() {
     }
 
-    public String getAcademicYear() {
+    public AcademicYear getAcademicYear() {
         return academicYear;
     }
 
-    public void setAcademicYear(String academicYear) {
+    public void setAcademicYear(AcademicYear academicYear) {
         this.academicYear = academicYear;
     }
-
+    
     public InstitutionClass getInstitutionClass() {
         return institutionClass;
     }

@@ -5,6 +5,7 @@
  */
 package haams.web.controllers;
 
+import haams.ejb.entities.AcademicTerm;
 import haams.ejb.entities.AccessRight;
 import haams.ejb.entities.EducationalInstitution;
 import haams.ejb.entities.InstitutionStaff;
@@ -91,6 +92,7 @@ public class LoginController implements Serializable {
                 userSession.setUsername(staffName);
                 userSession.setSessionDate(sessionDate);
                 userSession.setAcademicTerm(currentTerm);
+                userSession.setAcademicYear(crudService.find(AcademicTerm.class, currentTerm).getAcademicYear());
 
                 List<EducationalInstitution> configuration = crudService.findAll(EducationalInstitution.class, true);
 

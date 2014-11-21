@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:body>
+
+        <p:messages/>
+
+        <p:panel>
+            <f:facet name="header"><span style="font-weight: bolder;font-variant: small-caps">Academic Course</span></f:facet>
+            
+            <h:form>
+                <h:outputText value="NB: Course Code is required and once entered can not be changed" style="color: red;float: right"/>
+                <h:panelGrid columns="4" style="margin-top: 10px">
+                    <h:outputLabel value="Course Code:"/>
+                    <h:inputText value="#{academicCoursesController.courseCode}" size="7"/>
+                    <h:outputLabel value="Course Name:"/>
+                    <h:inputText value="#{academicCoursesController.institutionProgram.programName}"/>
+                </h:panelGrid>
+
+                <h:panelGrid columns="4" style="margin-top: 20px">
+                    <p:commandButton value="#{academicCoursesController.saveEditButtonText}" 
+                                     icon="ui-icon-disk" ajax="false"
+                                     action="#{academicCoursesController.saveEditButtonAction()}"/>
+                    <p:commandButton value="Clear" icon="ui-icon-cancel" ajax="false"
+                                     action="#{academicCoursesController.resetButtonAction()}"/>
+                </h:panelGrid>
+            </h:form>
+
+            <h:form id="courseListForm">
+
+                <p:dataTable paginator="true" rows="10" var="course" style="margin-top: 20px;width: 50%"
+                             value="#{academicCoursesView.institutionProgramList}"
+                             rowKey="#{course.commonId}"  
+                             selection="#{academicCoursesController.institutionProgram}"
+                             selectionMode="single"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">  
+
+                    <p:column>
+                        <f:facet name="header">Course Code</f:facet>
+                        <h:outputText value="#{course.commonId}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Course Name</f:facet>
+                        <h:outputText value="#{course.programName}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header"></f:facet>
+                        <p:commandLink value="Edit" style="text-decoration: none;color:blue"
+                                       action="#{academicCoursesController.rowSelectDataAction(course)}"
+                                       ajax="false"/>
+                        <p:commandLink value="Delete" style="text-decoration: none;color: red;margin-left: 20px"
+                                       action="#{academicCoursesController.deleteButtonAction(course)}"
+                                       onclick="confirm('Are you sure you want to delete?')"
+                                       ajax="false"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+        </p:panel>
+
+
+    </h:body>
+</html>
+

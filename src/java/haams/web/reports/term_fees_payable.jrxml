@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="term_fees_payable" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="662f4eb1-8bc9-42cf-b5e2-538b0741dd41">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="reportTitle" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="companyLogo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="companyName" class="java.lang.String"/>
+	<parameter name="companyTelephone" class="java.lang.String"/>
+	<parameter name="footerText" class="java.lang.String"/>
+	<parameter name="companyAddress" class="java.lang.String"/>
+	<field name="programme" class="java.lang.String"/>
+	<field name="educationLevel" class="java.lang.String"/>
+	<field name="dayStudentAmountPayable" class="java.math.BigDecimal"/>
+	<field name="boardingStudentAmountPayable" class="java.math.BigDecimal"/>
+	<field name="counter" class="java.lang.Integer"/>
+	<variable name="todayDate" class="java.util.Date">
+		<variableExpression><![CDATA[new java.util.Date()]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="81" splitType="Stretch">
+			<line>
+				<reportElement uuid="b7ebc3a7-3bca-47b2-98d4-0822967bd070" x="1" y="79" width="534" height="2"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="fe6be4cb-2bca-477a-ae20-863c74062851" x="2" y="78" width="533" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b693f51f-c27b-4051-a8ea-059259070be8" x="103" y="23" width="333" height="24" forecolor="#660000"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="8605f950-dd0d-4685-8554-bddcad3074e7" x="102" y="47" width="303" height="18" forecolor="#660000"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyAddress}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b9a2d08f-7781-4960-96b0-ef7e13a6f3fb" x="103" y="64" width="302" height="13" forecolor="#003366"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyTelephone}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="7718f5e2-8a55-4ab3-818e-354c79c2c781" x="1" y="23" width="102" height="53"/>
+				<imageExpression><![CDATA[$P{companyLogo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="26" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement uuid="441c8315-6781-476c-9792-676a2dd23d7c" key="textField" mode="Opaque" x="0" y="2" width="536" height="21" forecolor="#FFFFFF" backcolor="#999999"/>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Double" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{reportTitle}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="c4b03b6e-a9ec-4de7-a664-78732f5c6004" key="rectangle-1" x="0" y="0" width="535" height="23" backcolor="#000000"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="1e350680-babd-43cb-9867-10a66d7f0423" key="staticText-3" x="28" y="3" width="144" height="18" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROGRAMME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3eefb59e-77af-4e81-8773-7fae2e4cb8ac" key="staticText-4" x="179" y="3" width="59" height="18" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[YEAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="df943485-278f-4ace-89ef-5b069e101958" key="staticText-5" x="254" y="3" width="115" height="18" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DAY STUDENT (GH ȼ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bc1924c4-3eb7-4ca3-ac9d-7d896ec3c0ca" key="staticText-6" x="381" y="3" width="154" height="18" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BOARDING STUDENT  (GH ȼ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="15ea1b6a-fed5-44a6-be0e-fdec2f32857e" key="staticText-7" x="1" y="3" width="26" height="18" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="e56c2eb0-6ba6-441c-9b1e-2286ea46fa98" key="textField" x="28" y="0" width="78" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{programme}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="2e0f377a-cd2d-43c9-a40d-16b8ffa717f9" key="textField" x="180" y="0" width="48" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{educationLevel}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="81bdc2d5-ff7b-40ae-b0f6-b84114544768" key="textField" x="257" y="0" width="98" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dayStudentAmountPayable}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="604915d2-7626-4536-9e67-1c81495601da" key="textField" x="383" y="0" width="140" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{boardingStudentAmountPayable}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="c702dca2-dbd2-4c3c-b7e0-8de24a4d9f05" key="textField" x="2" y="0" width="25" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{counter}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="a5934f63-b909-4be8-a5bf-9f01f306a6a6" key="line-4" x="0" y="14" width="535" height="1"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="18" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="51" splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="14" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="4ef79ce8-f126-4660-98d9-74b69c4ff305" key="rectangle-3" x="0" y="0" width="535" height="14" backcolor="#666666"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="5da9d2c8-94c5-47bc-9b69-06baceae5488" key="staticText-2" x="211" y="0" width="200" height="14" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Report Generated From Sabonay Education]]></text>
+			</staticText>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="c1b96b68-e194-4dca-998e-12c385d4276e" key="textField" x="428" y="0" width="100" height="14" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{todayDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="50" splitType="Stretch"/>
+	</summary>
+</jasperReport>

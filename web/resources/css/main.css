@@ -327,5 +327,29 @@ h2.report-group-heading {
     background-color: #CCFFFF;
     font-weight: bold;
 }
+
+.subjectLeftPanel
+{
+    width: 40%;
+    height: 550px;
+    border: 1px solid #AAAAAA;
+    float: left;
+    /*background: none repeat scroll 0 0 #45A4DC;*/
+    background-color: #40ACE4;
+    /*background-image: url('../images/left_panel_bg.png');*/
+    z-index: 1000;
+}
+
+.subjectRightPanel
+{
+    float:left;
+    height:auto;
+    position:relative;
+    width:53%;
+    padding-bottom: 10px;
+    overflow: auto;
+    margin-left: 10px;
+}
+
 /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 

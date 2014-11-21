@@ -28,6 +28,7 @@ public class UserSession implements Serializable
     private String accessRight;
     private Date sessionDate;
     private String academicTerm;
+    private String academicYear;
     private String schoolName;
     private String schoolAddress;
     private List<EducationalInstitution> schoolConfig;
@@ -42,6 +43,14 @@ public class UserSession implements Serializable
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getAcademicYear() {
+        return academicYear;
+    }
+
+    public void setAcademicYear(String academicYear) {
+        this.academicYear = academicYear;
     }
 
     public String getSchoolName() {

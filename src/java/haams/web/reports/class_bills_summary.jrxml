@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="class_bills_summary" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="549" leftMargin="23" rightMargin="23" topMargin="20" bottomMargin="20" uuid="4214d453-ea27-4af9-80c5-056b97e755dc">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="reportTitle" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="academicYear" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="companyLogo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="companyName" class="java.lang.String"/>
+	<parameter name="companyTelephone" class="java.lang.String"/>
+	<parameter name="footerText" class="java.lang.String"/>
+	<parameter name="companyAddress" class="java.lang.String"/>
+	<field name="classProgramme" class="java.lang.String"/>
+	<field name="academicLevel" class="java.lang.String"/>
+	<field name="className" class="java.lang.String"/>
+	<field name="numberOnRoll" class="java.lang.Integer"/>
+	<field name="dayStudentsFees" class="java.lang.Double"/>
+	<field name="boardingStudentFees" class="java.lang.Double"/>
+	<variable name="todayDate" class="java.util.Date">
+		<variableExpression><![CDATA[new java.util.Date()]]></variableExpression>
+	</variable>
+	<variable name="numberOfClassPerLevel" class="java.lang.Integer" resetType="Group" resetGroup="academiclLevelGroup" calculation="Count">
+		<variableExpression><![CDATA[$F{className}]]></variableExpression>
+	</variable>
+	<group name="academiclLevelGroup">
+		<groupExpression><![CDATA[$F{academicLevel}]]></groupExpression>
+		<groupHeader>
+			<band height="47">
+				<textField>
+					<reportElement uuid="6419d13f-d105-44ed-88df-ae80988afd4d" mode="Opaque" x="0" y="0" width="549" height="17" backcolor="#FFFFFF"/>
+					<box leftPadding="3">
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{academicLevel}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="e3773886-e249-45df-b11e-e39803007f46" key="staticText-7" mode="Opaque" x="20" y="28" width="54" height="19" forecolor="#000000" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="0.5" lineColor="#009999"/>
+						<topPen lineWidth="0.5" lineColor="#009999"/>
+						<leftPen lineWidth="0.5" lineColor="#009999"/>
+						<bottomPen lineWidth="0.5" lineColor="#009999"/>
+						<rightPen lineWidth="0.5" lineColor="#009999"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Class Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="08f2ea81-2635-4bfa-a0dc-1f41f2763b83" key="staticText-7" mode="Opaque" x="74" y="28" width="123" height="19" forecolor="#000000" backcolor="#CCCCCC"/>
+					<box leftPadding="2">
+						<pen lineWidth="0.5" lineColor="#009999"/>
+						<topPen lineWidth="0.5" lineColor="#009999"/>
+						<leftPen lineWidth="0.5" lineColor="#009999"/>
+						<bottomPen lineWidth="0.5" lineColor="#009999"/>
+						<rightPen lineWidth="0.5" lineColor="#009999"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Class Programme]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="aa2f38b9-76ac-4a8a-b306-3b4d3ee1f9f0" key="staticText-11" mode="Opaque" x="277" y="28" width="127" height="19" forecolor="#000000" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="0.5" lineColor="#009999"/>
+						<topPen lineWidth="0.5" lineColor="#009999"/>
+						<leftPen lineWidth="0.5" lineColor="#009999"/>
+						<bottomPen lineWidth="0.5" lineColor="#009999"/>
+						<rightPen lineWidth="0.5" lineColor="#009999"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Day Student(s) Fees]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="f9347957-7b24-4697-91c0-244f9c8e4dca" key="staticText-11" mode="Opaque" x="197" y="28" width="80" height="19" forecolor="#000000" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="0.5" lineColor="#009999"/>
+						<topPen lineWidth="0.5" lineColor="#009999"/>
+						<leftPen lineWidth="0.5" lineColor="#009999"/>
+						<bottomPen lineWidth="0.5" lineColor="#009999"/>
+						<rightPen lineWidth="0.5" lineColor="#009999"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Number on Roll]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="b0987440-78d1-4309-9200-ea04cdbc89da" key="staticText-8" mode="Opaque" x="5" y="28" width="15" height="19" forecolor="#000000" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="0.5" lineColor="#009999"/>
+						<topPen lineWidth="0.5" lineColor="#009999"/>
+						<leftPen lineWidth="0.5" lineColor="#009999"/>
+						<bottomPen lineWidth="0.5" lineColor="#009999"/>
+						<rightPen lineWidth="0.5" lineColor="#009999"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[No]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="ba4d53f9-5a11-41f8-849d-19faf4641c5b" key="staticText-11" mode="Opaque" x="404" y="28" width="124" height="19" forecolor="#000000" backcolor="#CCCCCC"/>
+					<box>
+						<pen lineWidth="0.5" lineColor="#009999"/>
+						<topPen lineWidth="0.5" lineColor="#009999"/>
+						<leftPen lineWidth="0.5" lineColor="#009999"/>
+						<bottomPen lineWidth="0.5" lineColor="#009999"/>
+						<rightPen lineWidth="0.5" lineColor="#009999"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<text><![CDATA[Boarding Student(s) Fees]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="23"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="81" splitType="Stretch">
+			<line>
+				<reportElement uuid="b7ebc3a7-3bca-47b2-98d4-0822967bd070" x="1" y="79" width="547" height="2"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="fe6be4cb-2bca-477a-ae20-863c74062851" x="2" y="78" width="546" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b693f51f-c27b-4051-a8ea-059259070be8" x="103" y="23" width="333" height="24" forecolor="#660000"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="8605f950-dd0d-4685-8554-bddcad3074e7" x="102" y="47" width="303" height="18" forecolor="#660000"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyAddress}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b9a2d08f-7781-4960-96b0-ef7e13a6f3fb" x="103" y="64" width="302" height="13" forecolor="#003366"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyTelephone}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="7718f5e2-8a55-4ab3-818e-354c79c2c781" x="1" y="23" width="102" height="53"/>
+				<imageExpression><![CDATA[$P{companyLogo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="51" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement uuid="6f146421-8ee2-4552-ab9a-0ef93283f316" key="textField" mode="Opaque" x="0" y="2" width="549" height="21" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Double" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{reportTitle}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f69802e4-c1cf-4f89-865a-02f2b66fd011" x="5" y="26" width="85" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Academic Term:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="2ce7bda1-318f-4db7-b3eb-e40fef0d1f99" x="0" y="46" width="549" height="1" forecolor="#CCCCCC" backcolor="#999999"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="b746b49b-77a5-47e5-a5ab-798c30a89520" x="0" y="49" width="549" height="1" forecolor="#CCCCCC" backcolor="#999999"/>
+				<graphicElement>
+					<pen lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="3984ff50-d353-4c81-be5f-e28b8b12bf5e" key="textField-2" x="90" y="27" width="162" height="13"/>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{academicYear}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement uuid="ec2b9fdf-fa85-4f2b-adb1-a130387401dd" x="404" y="0" width="124" height="12"/>
+				<box leftPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{boardingStudentFees}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="1e3dea34-2f31-4975-975e-6beecf845c94" x="20" y="0" width="54" height="12"/>
+				<box leftPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{className}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="dab808eb-ae6e-4915-a503-76e01938f528" x="74" y="0" width="123" height="12"/>
+				<box leftPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{classProgramme}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="25ccb94f-06bf-44a3-aa7a-c0fa76cac4fd" x="5" y="0" width="15" height="12"/>
+				<box leftPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{numberOfClassPerLevel}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="20a33b13-f135-4218-abfe-0aedeaf4b029" x="197" y="0" width="80" height="12"/>
+				<box leftPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numberOnRoll}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement uuid="9c19a172-b1b8-40e3-a0b3-5784e2c93a08" x="277" y="0" width="127" height="12"/>
+				<box leftPadding="2" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dayStudentsFees}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="14" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="314e1bd4-1fb9-419d-ae2e-667c16e9c8dd" key="rectangle-3" x="0" y="0" width="535" height="14" backcolor="#666666"/>
+			</rectangle>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="edf25feb-dec7-430c-9449-74e7883f214c" key="textField" x="428" y="0" width="100" height="14" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{todayDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="42c357fa-1e4c-49ce-a453-0fc61ca05c70" x="0" y="2" width="197" height="12" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{footerText}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="87" splitType="Stretch"/>
+	</summary>
+</jasperReport>

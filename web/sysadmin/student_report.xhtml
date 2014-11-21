@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:body>
+        <p:messages/>
+
+        <p:panel style="overflow: auto;margin-top: 10px">
+            <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Student Report Generation</span></f:facet>
+            <h:form>
+
+                <h:panelGrid columns="6" style="margin-top: 0px;margin-left: 0px" >
+                    <h:outputLabel value="Class:"/>
+                    <h:selectOneMenu  value="#{studentReportController.selectedClass}" styleClass="textarea">
+                        <f:selectItem itemLabel="....Select One...."/>
+                        <f:selectItems value="#{studentReportCommentController.teacherClassOptions}"/>
+                    </h:selectOneMenu>
+
+                    <h:commandLink value="Generate Class Terminal Report" target="_blank"
+                                   action="#{studentReportController.generateStudentReport()}"
+                                   style="margin-left: 10px;background-color: #40ACE4;color: #fff;font-weight: bolder"/>
+
+
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
+    </h:body>
+</html>
+

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package haams.ejb.entities;
 
 import javax.persistence.Column;
@@ -23,20 +22,20 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "InstitutionClass.findAll", query = "SELECT i FROM InstitutionClass i")})
 public class InstitutionClass extends CommonEntity {
-   
+
     @Column(name = "class_name")
     private String className;
-    
+
     @JoinColumn(name = "academic_level")
+    @ManyToOne
     private AcademicLevel academicLevel;
-    
+
     @JoinColumn(name = "institution_program")
     @ManyToOne
-    private InstitutionProgram institutionProgram;    
-    
+    private InstitutionProgram institutionProgram;
+
     @Column(name = "bill_term_set")
     private String billTermSet;
-   
 
     public InstitutionClass() {
     }

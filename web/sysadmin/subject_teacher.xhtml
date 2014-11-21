@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head></h:head>
+
+    <h:body>
+        <p:messages/>
+
+        <h:form rendered="#{subjectTeacherController.renderSubjectTeacherEntryForm}">
+
+            <p:panel>
+
+                <f:facet name="header"><span style="font-weight: bolder;font-variant: small-caps">Subject Teacher Detail</span></f:facet>
+                <h:panelGrid columns="4">
+                    <h:outputLabel value="Teacher:"/>
+                    <h:selectOneMenu styleClass="textarea" value="#{subjectTeacherController.selectedTeacher}">
+                        <f:selectItem itemLabel="...Select One..." itemValue="null"/>
+                        <f:selectItems value="#{commonOptions.teachingStaffOptions}"/>
+                    </h:selectOneMenu>  
+                    <h:outputLabel value="Subject:"/>
+                    <h:selectOneMenu styleClass="textarea" value="#{subjectTeacherController.selectedSubject}">
+                        <f:selectItem itemLabel="...Select One..." itemValue="null"/>
+                        <f:selectItems value="#{commonOptions.subjectOptions}"/>
+                    </h:selectOneMenu>  
+                </h:panelGrid>
+                <h:panelGrid style="margin-top: 10px">
+                    <h:outputLabel value="Select Class:"/>
+                    <p:pickList var="subjectTeacher" value="#{subjectTeacherController.courseClasses}" 
+                                itemLabel="#{subjectTeacher}"  
+                                itemValue="#{subjectTeacher}" /> 
+                </h:panelGrid>
+
+                <h:panelGrid columns="4" style="margin-top: 20px">
+                    <p:commandButton value="#{subjectTeacherController.saveEditButtonText}" 
+                                     icon="ui-icon-disk" ajax="false"
+                                     action="#{subjectTeacherController.saveEditButtonAction()}"/>
+                    <p:commandButton value="Delete"
+                                     icon="ui-icon-trash" ajax="false"
+                                     onclick="confirm('Are you sure you want to delete?')"
+                                     action="#{subjectTeacherController.deleteButtonAction()}"/>
+                    <p:commandButton value="Clear" icon="ui-icon-cancel" ajax="false"
+                                     action="#{subjectTeacherController.resetButtonAction()}"/>
+                </h:panelGrid>
+
+            </p:panel>
+
+        </h:form>
+
+        <h:form rendered="#{subjectTeacherController.renderSubjectTeacherListForm}">
+            <p:panel style="margin-top: 0px">
+
+                <f:facet name="header"><span style="float: left;font-weight: bolder;font-variant: small-caps">Subject Teacher Detail</span></f:facet>
+
+                <h:panelGrid columns="7" style="margin-left: 0px">
+                    <h:outputLabel value="Search By:" style="font-weight: bolder"/>
+                    <h:selectOneMenu styleClass="textarea" value="#{subjectTeacherController.searchAttribute}">
+                        <p:ajax event="change" update="searchTextOption" 
+                                listener="#{subjectTeacherController.searchParameters()}"/>
+                        <f:selectItem itemLabel=".....Select One....." itemValue=""/>
+                        <f:selectItem itemLabel="Academic Term" itemValue="academicTerm"/>
+                        <f:selectItem itemLabel="Academic Year" itemValue="academicYear"/>
+                        <f:selectItem itemLabel="Subject" itemValue="subject"/>
+                        <f:selectItem itemLabel="Teacher" itemValue="teacher"/>
+                        <f:selectItem itemLabel="All Subject Teachers" itemValue="allTeachers"/>
+                    </h:selectOneMenu>
+                    <h:selectOneMenu styleClass="textarea" value="#{subjectTeacherController.searchText}" id="searchTextOption">
+                        <f:selectItems value="#{subjectTeacherController.searchTextOptions}"/>
+                    </h:selectOneMenu>
+                    <p:commandButton value="Search" ajax="false" icon="ui-icon-search" style="margin-left: 10px"
+                                     action="#{subjectTeacherController.searchButtonAction()}"/>
+                    <p:commandButton value="Clear" icon="ui-icon-cancel" ajax="false"
+                                     action="#{subjectTeacherController.resetButtonAction()}"/>
+
+                </h:panelGrid>
+
+                <p:dataTable paginator="true" rows="10" var="subTeach" style="margin-top: 10px;width: 80%"
+                             value="#{subjectTeacherController.subjectTeacherList}"
+                             rowKey="#{subTeach.subjectTeacherId}"  
+                             selection="#{subjectTeacherController.selectedSubject}"
+                             selectionMode="single"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">     
+
+                    <p:column>
+                        <f:facet name="header">Academic Term</f:facet>
+                        <h:outputText value="#{subTeach.academicTerm}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Subject</f:facet>
+                        <h:outputText value="#{subTeach.subjectName}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Teacher</f:facet>
+                        <h:outputText value="#{subTeach.subjectTeacherName}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Class(es)</f:facet>
+                        <h:outputText value="#{subTeach.subjectClass}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header"></f:facet>
+                        <p:commandLink value="Edit" style="text-decoration: none;color:blue"
+                                       action="#{classRoomController.rowSelectDataAction(class)}"
+                                       ajax="false"/>
+                        <p:commandLink value="Delete" style="text-decoration: none;color: red;margin-left: 20px"
+                                       action="#{classRoomController.deleteButtonAction(class)}"
+                                       onclick="confirm('Are you sure you want to delete?')"
+                                       ajax="false"/>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+
+    </h:body>
+
+</html>
+

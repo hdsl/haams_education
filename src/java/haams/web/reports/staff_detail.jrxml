@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="staff_detail" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f972c56d-3b7c-475a-ae54-3a3a7073d63d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="reportTitle" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="companyAddress" class="java.lang.String"/>
+	<parameter name="footerText" class="java.lang.String"/>
+	<parameter name="companyTelephone" class="java.lang.String"/>
+	<parameter name="companyName" class="java.lang.String"/>
+	<parameter name="companyLogo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="academicYear" class="java.lang.String"/>
+	<field name="dateOfAppointment" class="java.util.Date"/>
+	<field name="staffName" class="java.lang.String"/>
+	<field name="staffPrimaryContact" class="java.lang.String"/>
+	<field name="staffEmailAddress" class="java.lang.String"/>
+	<field name="levelOfEducation" class="java.lang.String"/>
+	<field name="staffCategory" class="java.lang.String"/>
+	<field name="gender" class="java.lang.String"/>
+	<variable name="totalFemaletSaff" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$V{femaleCategoryStaff}]]></variableExpression>
+	</variable>
+	<variable name="total_staff" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$V{totalMaleStaff} + $V{totalFemaletSaff}]]></variableExpression>
+	</variable>
+	<variable name="numberOfStaffPerCat" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{staffPrimaryContact}]]></variableExpression>
+	</variable>
+	<variable name="totalMaleStaff" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$V{maleCategoryStaff}]]></variableExpression>
+	</variable>
+	<variable name="totalCategorystaff" class="java.lang.Integer" resetType="Group" resetGroup="Category" calculation="Sum">
+		<variableExpression><![CDATA[$V{maleCategoryStaff} + $V{femaleCategoryStaff}]]></variableExpression>
+	</variable>
+	<variable name="maleCategoryStaff" class="java.lang.Integer" resetType="Group" resetGroup="Category" calculation="Count">
+		<variableExpression><![CDATA[$F{gender}.equalsIgnoreCase( "Male" )]]></variableExpression>
+	</variable>
+	<variable name="femaleCategoryStaff" class="java.lang.Integer" resetType="Group" resetGroup="Category" calculation="Count">
+		<variableExpression><![CDATA[$F{gender}.equalsIgnoreCase( "female" )]]></variableExpression>
+	</variable>
+	<group name="Category">
+		<groupExpression><![CDATA[$F{staffCategory}]]></groupExpression>
+		<groupHeader>
+			<band height="62">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement uuid="86f6d6c9-b09d-40b6-bffe-30efda459ee8" x="2" y="3" width="389" height="17"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{staffCategory}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement uuid="f47b6b2b-7871-46e1-be17-6b8f8e2acaaf" x="0" y="32" width="554" height="30" backcolor="#CCCCCC"/>
+				</rectangle>
+				<staticText>
+					<reportElement uuid="a21098aa-a82f-4ec3-8208-a76466360f89" x="262" y="32" width="114" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Email Address]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="5f0eece2-0900-4ff6-b809-8c7d4aeee2c4" x="164" y="32" width="98" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tel. No.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="8948d1ed-7af9-404e-8f85-6c1b546f8510" x="20" y="32" width="116" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Staff Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="63386084-8b7d-472e-87ab-93ef756cf396" x="0" y="33" width="20" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[No.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="80550bad-7967-4f06-baa9-12ad51699135" x="378" y="33" width="115" height="19"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Level of Education]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1f4a1b53-f057-4fe8-9f4d-0e383ad2abd5" x="494" y="32" width="62" height="30"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Date of Appt.]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="63">
+				<staticText>
+					<reportElement uuid="639c38fc-21b7-4b38-bb61-e8498c06aa5c" x="293" y="24" width="122" height="17"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Female :]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement uuid="e654f5e5-0b55-4419-88a7-2ca097a6cce7" x="421" y="7" width="102" height="16"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{maleCategoryStaff}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement uuid="b6841672-068c-4cc8-8a7b-2e92a43a5f05" x="421" y="25" width="102" height="16"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{femaleCategoryStaff}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="eca81cd7-b67e-49fb-8942-492323604a7c" x="293" y="6" width="122" height="17"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Male :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="5f9cca56-10b4-4414-a008-078e26a17d38" x="293" y="44" width="122" height="17"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Staff :]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement uuid="c1391a71-31dc-41e5-8efc-71c1c41d6dfd" x="421" y="44" width="102" height="17"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{totalCategorystaff}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="81" splitType="Stretch">
+			<line>
+				<reportElement uuid="b7ebc3a7-3bca-47b2-98d4-0822967bd070" x="1" y="79" width="553" height="2"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineColor="#CCCCCC"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="fe6be4cb-2bca-477a-ae20-863c74062851" x="2" y="78" width="552" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b693f51f-c27b-4051-a8ea-059259070be8" x="103" y="23" width="333" height="24" forecolor="#660000"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="8605f950-dd0d-4685-8554-bddcad3074e7" x="102" y="47" width="303" height="18" forecolor="#660000"/>
+				<textElement>
+					<font size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyAddress}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b9a2d08f-7781-4960-96b0-ef7e13a6f3fb" x="103" y="64" width="302" height="13" forecolor="#003366"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{companyTelephone}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="7718f5e2-8a55-4ab3-818e-354c79c2c781" x="1" y="23" width="102" height="53"/>
+				<imageExpression><![CDATA[$P{companyLogo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="45" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+				<reportElement uuid="569dc27b-0050-4600-866c-6ea299139c4d" key="textField" mode="Opaque" x="1" y="1" width="555" height="21" forecolor="#000000" backcolor="#CCCCCC"/>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Double" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{reportTitle}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="e76a0657-1653-40e4-a4cc-c9af856e9e7f" key="textField" x="103" y="27" width="176" height="15"/>
+				<box>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{academicYear}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="62cf6aaf-8b68-4ed4-a473-7dad9ebb2a23" key="staticText-3" x="2" y="27" width="101" height="15"/>
+				<textElement>
+					<font fontName="Book Antiqua" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[ACADEMIC YEAR :]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="5"/>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="f2eedc55-7446-40dd-b2e4-ff28be677380" x="1" y="0" width="19" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{numberOfStaffPerCat}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="52303118-2a75-42cd-9caa-bcd8b83be129" x="20" y="1" width="143" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{staffName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="d10f2234-0705-4c1d-921f-0884cc141b16" x="164" y="1" width="98" height="14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{staffPrimaryContact}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="3634eeba-c420-41cd-be3c-6219f964825e" x="261" y="1" width="117" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{staffEmailAddress}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="1b0f3209-289e-4a2e-82b8-5e7efd305564" x="376" y="1" width="118" height="14"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{levelOfEducation}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="54904e7e-67ee-4dcc-a989-70475c415403" x="0" y="18" width="554" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<textField pattern="EEE, dd MM yyyy" isBlankWhenNull="true">
+				<reportElement uuid="acfa4934-7a23-48c3-b5d5-d1b209141e51" x="493" y="2" width="61" height="14"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dateOfAppointment}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="10" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="114" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="2e23883a-04bf-4406-a21c-ea44feac78cf" x="399" y="48" width="143" height="17"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{total_staff}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="8446c43d-24e2-46dd-8829-a80d461480eb" x="268" y="48" width="122" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total School Staff :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e87c19ab-6359-4300-9bbe-503aedcb77f6" x="268" y="10" width="122" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Male Staff :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="82fabe51-be4a-4954-86b3-ffa6c63a8402" x="399" y="11" width="125" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalMaleStaff}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="80f26cc5-9ea5-41c7-9fa4-d6da7cb17455" x="268" y="28" width="122" height="17"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Female Staff :]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="1623ef87-3ea9-438a-b0cb-5d5515053e38" x="399" y="29" width="130" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalFemaletSaff}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

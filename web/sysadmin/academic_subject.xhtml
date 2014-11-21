@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:body>
+        <p:messages/>
+
+        <p:panel>
+
+            <f:facet name="header"><span style="font-weight: bolder;font-variant: small-caps">Academic Subjects</span></f:facet>
+
+            <h:form id="subjectEntryForm">
+                <h:panelGrid columns="4" style="margin-top: 10px">
+                    <h:outputLabel value="Subject Code:"/>
+                    <h:inputText value="#{subjectsController.subjectCode}" size="7"/>
+                    <h:outputLabel value="Subject Name:"/>
+                    <h:inputText value="#{subjectsController.institutionSubject.subjectName}"/>
+                    <h:outputLabel value="Subject Type:"/>
+                    <h:selectOneMenu value="#{subjectsController.institutionSubject.subjectType}">
+                        <f:selectItem itemLabel="...Select One..." itemValue=""/>
+                        <f:selectItem itemLabel="Unknown" itemValue="UNKNOWN"/>
+                        <f:selectItem itemLabel="CORE SUBJECT" itemValue="CORE_SUBJECT"/>
+                        <f:selectItem itemLabel="ELECTIVE SUBJECT" itemValue="ELECTIVE_SUBJECT"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+
+                <h:panelGrid columns="4" style="margin-top: 20px">
+                    <p:commandButton value="#{subjectsController.saveEditButtonText}" 
+                                     icon="ui-icon-disk" ajax="false"
+                                     action="#{subjectsController.saveEditButtonAction()}"/>
+                    <p:commandButton value="Clear" icon="ui-icon-cancel" ajax="false"
+                                     action="#{subjectsController.resetButtonAction()}"/>
+                </h:panelGrid>
+
+            </h:form>
+
+            <h:form id="subjectListForm">
+
+                <p:dataTable paginator="true" rows="10" var="subject" style="margin-top: 10px;width: 70%"
+                             value="#{subjectView.institutionSubjectList}"
+                             rowKey="#{subject.commonId}"  
+                             selection="#{subjectsController.institutionSubject}"
+                             selectionMode="single"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">  
+
+                    <p:column>
+                        <f:facet name="header">Subject Code</f:facet>
+                        <h:outputText value="#{subject.commonId}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Subject Name</f:facet>
+                        <h:outputText value="#{subject.subjectName}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Subject Type</f:facet>
+                        <h:outputText value="#{subject.subjectType}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header"></f:facet>
+                        <p:commandLink value="Edit" style="text-decoration: none;color:blue"
+                                       action="#{subjectsController.rowSelectDataAction(subject)}"
+                                       ajax="false"/>
+                        <p:commandLink value="Delete" style="text-decoration: none;color: red;margin-left: 20px"
+                                       action="#{subjectsController.deleteButtonAction(subject)}"
+                                       onclick="confirm('Are you sure you want to delete?')"
+                                       ajax="false"/>
+                    </p:column>
+                </p:dataTable>
+
+            </h:form>
+
+        </p:panel>
+    </h:body>
+</html>
+

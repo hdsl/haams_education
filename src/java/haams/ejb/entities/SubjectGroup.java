@@ -1,20 +1,15 @@
 package haams.ejb.entities;
 
-import haams.ejb.services.CrudService;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.inject.Inject;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 /**
  *
@@ -26,8 +21,9 @@ import javax.persistence.Transient;
     @NamedQuery(name = "SubjectGroup.findAll", query = "SELECT s FROM SubjectGroup s")})
 public class SubjectGroup extends CommonEntity {
 
-    @Column(name = "institution_program")
-    private String institutionProgram;
+    @JoinColumn(name = "institution_program")
+    @ManyToOne
+    private InstitutionProgram institutionProgram;
 
     @Column(name = "subject_group_name")
     private String subjectGroupName;
@@ -42,14 +38,6 @@ public class SubjectGroup extends CommonEntity {
     private String groupStatus;
 
     public SubjectGroup() {
-    }
-
-    public String getInstitutionProgram() {
-        return institutionProgram;
-    }
-
-    public void setInstitutionProgram(String institutionProgram) {
-        this.institutionProgram = institutionProgram;
     }
 
     public String getSubjectGroupName() {
@@ -68,6 +56,14 @@ public class SubjectGroup extends CommonEntity {
         this.groupName = groupName;
     }
 
+    public InstitutionProgram getInstitutionProgram() {
+        return institutionProgram;
+    }
+
+    public void setInstitutionProgram(InstitutionProgram institutionProgram) {
+        this.institutionProgram = institutionProgram;
+    }
+
     public String getSubjectsIds() {
         return subjectsIds;
     }
@@ -83,49 +79,52 @@ public class SubjectGroup extends CommonEntity {
     public void setGroupStatus(String groupStatus) {
         this.groupStatus = groupStatus;
     }
-
-    @Transient
-    private List<InstitutionSubject> combinationSubjectList = new LinkedList<>();
-
-    public List<InstitutionSubject> getCombinationSubjectList() {
-
-        combinationSubjectList.clear();
-
-        if (subjectsIds == null) {
-            return combinationSubjectList;
-        }
-
-        String[] subjectCodes = subjectsIds.split("/");
-
-        for (String subjectCode : subjectCodes) {
-
-            try {
-                CrudService newInstance = CrudService.class.newInstance();
-
-                InstitutionSubject schoolSubject = newInstance.find(InstitutionSubject.class, subjectCode);
-
-                if (schoolSubject != null) {
-                    combinationSubjectList.add(schoolSubject);
-                }
-            } catch (InstantiationException ex) {
-                Logger.getLogger(SubjectGroup.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(SubjectGroup.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return combinationSubjectList;
-    }
-
-    public void setCombinationSubjectList(List<InstitutionSubject> combinationSubjectList) {
-        this.combinationSubjectList = combinationSubjectList;
-
-        subjectsIds = "";
-
-        for (InstitutionSubject schoolSubject : combinationSubjectList) {
-            subjectsIds = subjectsIds + "/" + schoolSubject.getCommonId();
-        }
-
-    }
+//
+//    @Transient
+//    private List<InstitutionSubject> combinationSubjectList = new LinkedList<>();
+//
+//    public List<InstitutionSubject> getCombinationSubjectList() {
+//
+//        combinationSubjectList.clear();
+//
+//        if (subjectsIds == null) {
+//            return combinationSubjectList;
+//        }
+//
+//        String[] subjectCodes = subjectsIds.split("/");
+//
+//        for (String subjectCode : subjectCodes) {
+//
+//            try {
+//                CrudService newInstance = CrudService.class.newInstance();
+//                
+//                System.out.println("Subject id..............."+subjectCode);
+//
+//                InstitutionSubject schoolSubject = newInstance.find(InstitutionSubject.class, subjectCode);
+//
+//                System.out.println("school subject from entity..........."+schoolSubject);
+//                if (schoolSubject != null) {
+//                    combinationSubjectList.add(schoolSubject);
+//                }
+//            } catch (InstantiationException ex) {
+//                Logger.getLogger(SubjectGroup.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (IllegalAccessException ex) {
+//                Logger.getLogger(SubjectGroup.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//        return combinationSubjectList;
+//    }
+//
+//    public void setCombinationSubjectList(List<InstitutionSubject> combinationSubjectList) {
+//        this.combinationSubjectList = combinationSubjectList;
+//
+//        subjectsIds = "";
+//
+//        for (InstitutionSubject schoolSubject : combinationSubjectList) {
+//            subjectsIds = subjectsIds + "/" + schoolSubject.getCommonId();
+//        }
+//
+//    }
 
     public String[] combinationSubjectCodes() {
         if (subjectsIds == null) {

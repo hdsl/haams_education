@@ -4,11 +4,13 @@
  */
 package haams.web.utils;
 
+import haams.ejb.entities.AcademicLevel;
 import haams.ejb.entities.AcademicTerm;
 import haams.ejb.entities.AcademicYear;
 import haams.ejb.entities.AccessRight;
 import haams.ejb.entities.InstitutionProgram;
 import haams.ejb.entities.InstitutionStaff;
+import haams.ejb.entities.InstitutionSubject;
 import haams.ejb.entities.KinRelation;
 import haams.ejb.entities.LevelOfEducation;
 import haams.ejb.entities.MaritalStatus;
@@ -140,24 +142,24 @@ public class CommonOptions implements Serializable {
         this.schoolStaffOptions = schoolStaffOptions;
     }
 
-//    public SelectItem[] getSubjectOptions() {
-//
-//        List<InstitutionSubject> institutionSubjectList = dataSource.getCommonQry().institutionSubjectGetAll(false);
-//
-//        if (institutionSubjectList.size() > 0) {
-//
-//            subjectOptions = new SelectItem[institutionSubjectList.size()];
-//
-//            int count = 0;
-//
-//            for (InstitutionSubject estProp : institutionSubjectList) {
-//                subjectOptions[count] = new SelectItem(estProp.getSubjectId(), estProp.getSubjectName());
-//
-//                count++;
-//            }
-//        }
-//        return subjectOptions;
-//    }
+    public SelectItem[] getSubjectOptions() {
+
+        List<InstitutionSubject> institutionSubjectList = crudService.findAll(InstitutionSubject.class, false);
+
+        if (institutionSubjectList.size() > 0) {
+
+            subjectOptions = new SelectItem[institutionSubjectList.size()];
+
+            int count = 0;
+
+            for (InstitutionSubject estProp : institutionSubjectList) {
+                subjectOptions[count] = new SelectItem(estProp.getCommonId(), estProp.getSubjectName());
+
+                count++;
+            }
+        }
+        return subjectOptions;
+    }
 
     public void setSubjectOptions(SelectItem[] subjectOptions) {
         this.subjectOptions = subjectOptions;
@@ -232,34 +234,35 @@ public class CommonOptions implements Serializable {
         this.studentClassOptions = studentClassOptions;
     }
 
-//    public SelectItem[] getTeachingStaffOptions() {
-//        List<InstitutionStaff> institutionStaffList = dataSource.getCustomQry().institutionTeachingStaffGetAll(false);
-//
-//        if (institutionStaffList.size() > 0) {
-//
-//            teachingStaffOptions = new SelectItem[institutionStaffList.size()];
-//
-//            int count = 0;
-//
-//            for (InstitutionStaff estProp : institutionStaffList) {
-//
-//                String gender;
-//
-//                if (estProp.getGender().equals('F')) {
-//                    gender = "(Miss.)";
-//                } else {
-//                    gender = "(Mr.)";
-//                }
-//
-//                String staffName = estProp.getSurname().toUpperCase() + " " + estProp.getOtherName() + " " + gender;
-//
-//                teachingStaffOptions[count] = new SelectItem(estProp.getStaffId(), staffName);
-//
-//                count++;
-//            }
-//        }
-//        return teachingStaffOptions;
-//    }
+    public SelectItem[] getTeachingStaffOptions() {
+        
+        List<InstitutionStaff> institutionStaffList = crudService.findAll(InstitutionStaff.class, false);
+
+        if (institutionStaffList.size() > 0) {
+
+            teachingStaffOptions = new SelectItem[institutionStaffList.size()];
+
+            int count = 0;
+
+            for (InstitutionStaff estProp : institutionStaffList) {
+
+                String gender;
+
+                if (estProp.getGender().equals('F')) {
+                    gender = "(Miss.)";
+                } else {
+                    gender = "(Mr.)";
+                }
+
+                String staffName = estProp.getSurname().toUpperCase() + " " + estProp.getOtherName() + " " + gender;
+
+                teachingStaffOptions[count] = new SelectItem(estProp.getCommonId(), staffName);
+
+                count++;
+            }
+        }
+        return teachingStaffOptions;
+    }
 
     public void setTeachingStaffOptions(SelectItem[] teachingStaffOptions) {
         this.teachingStaffOptions = teachingStaffOptions;
@@ -455,22 +458,22 @@ public class CommonOptions implements Serializable {
         this.regionOptions = regionOptions;
     }
 
-//    public SelectItem[] getAcademicLevelOptions() {
-//
-//        List<AcademicLevel> academicLevelList = dataSource.getCommonQry().academicLevelGetAll();
-//
-//        academicLevelOptions = new SelectItem[academicLevelList.size()];
-//
-//        int count = 0;
-//
-//        for (AcademicLevel academicLevel : academicLevelList) {
-//            academicLevelOptions[count] = new SelectItem(academicLevel.getAcademicLevelId(), academicLevel.getAcademicLevelId());
-//
-//            count++;
-//        }
-//
-//        return academicLevelOptions;
-//    }
+    public SelectItem[] getAcademicLevelOptions() {
+
+        List<AcademicLevel> academicLevelList = crudService.findAll(AcademicLevel.class, true);
+
+        academicLevelOptions = new SelectItem[academicLevelList.size()];
+
+        int count = 0;
+
+        for (AcademicLevel academicLevel : academicLevelList) {
+            academicLevelOptions[count] = new SelectItem(academicLevel.getAcademicLevelId(), academicLevel.getAcademicLevelId());
+
+            count++;
+        }
+
+        return academicLevelOptions;
+    }
 
     public void setAcademicLevelOptions(SelectItem[] academicLevelOptions) {
         this.academicLevelOptions = academicLevelOptions;

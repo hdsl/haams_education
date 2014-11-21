@@ -70,6 +70,7 @@ public class SchoolStaffController implements Serializable {
     Date dateOfAdmission;
 
 //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Methods">
     public SchoolStaffController() {
     }
@@ -570,6 +571,7 @@ public class SchoolStaffController implements Serializable {
     }
 
 //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Getters and Setters">
     public String getSaveEditButtonText() {
         return saveEditButtonText;
